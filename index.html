@@ -550,8 +550,8 @@ body::before {
 .marquee-item::after {
   content: "";
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -561,12 +561,12 @@ body::before {
   top: -1px;
 }
 .marquee-item:nth-child(odd)::after {
-  /* Baseball — white with red stitching */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%23f4f1ea' stroke='%23ccc' stroke-width='.5'/%3E%3Cpath d='M7 2.8C5.2 5.2 4.8 7.8 5 10c-.2 2.2.2 4.8 2 7.2' fill='none' stroke='%23cc2200' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M13 2.8c1.8 2.4 2.2 5 2 7.2.2 2.2-.2 4.8-2 7.2' fill='none' stroke='%23cc2200' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 5.5l-2 1M7 8.5l-2 1M7 11.5l-2 1M7 14.5l-2 1' fill='none' stroke='%23cc2200' stroke-width='.8' stroke-linecap='round'/%3E%3Cpath d='M13 5.5l2 1M13 8.5l2 1M13 11.5l2 1M13 14.5l2 1' fill='none' stroke='%23cc2200' stroke-width='.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  /* Baseball — blue with lighter blue stitching */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%230EA5E9' stroke='%230284c7' stroke-width='.5'/%3E%3Cpath d='M7 2.8C5.2 5.2 4.8 7.8 5 10c-.2 2.2.2 4.8 2 7.2' fill='none' stroke='%23e0f2fe' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M13 2.8c1.8 2.4 2.2 5 2 7.2.2 2.2-.2 4.8-2 7.2' fill='none' stroke='%23e0f2fe' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 5.5l-2 1M7 8.5l-2 1M7 11.5l-2 1M7 14.5l-2 1' fill='none' stroke='%23e0f2fe' stroke-width='.8' stroke-linecap='round'/%3E%3Cpath d='M13 5.5l2 1M13 8.5l2 1M13 11.5l2 1M13 14.5l2 1' fill='none' stroke='%23e0f2fe' stroke-width='.8' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 .marquee-item:nth-child(even)::after {
-  /* Softball — yellow with red stitching */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%23f0d060' stroke='%23c9a000' stroke-width='.5'/%3E%3Cpath d='M7 2.8C5.2 5.2 4.8 7.8 5 10c-.2 2.2.2 4.8 2 7.2' fill='none' stroke='%23cc2200' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M13 2.8c1.8 2.4 2.2 5 2 7.2.2 2.2-.2 4.8-2 7.2' fill='none' stroke='%23cc2200' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 5.5l-2 1M7 8.5l-2 1M7 11.5l-2 1M7 14.5l-2 1' fill='none' stroke='%23cc2200' stroke-width='.8' stroke-linecap='round'/%3E%3Cpath d='M13 5.5l2 1M13 8.5l2 1M13 11.5l2 1M13 14.5l2 1' fill='none' stroke='%23cc2200' stroke-width='.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  /* Softball — lighter blue with dark blue stitching */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%2338BDF8' stroke='%230EA5E9' stroke-width='.5'/%3E%3Cpath d='M7 2.8C5.2 5.2 4.8 7.8 5 10c-.2 2.2.2 4.8 2 7.2' fill='none' stroke='%23075985' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M13 2.8c1.8 2.4 2.2 5 2 7.2.2 2.2-.2 4.8-2 7.2' fill='none' stroke='%23075985' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M7 5.5l-2 1M7 8.5l-2 1M7 11.5l-2 1M7 14.5l-2 1' fill='none' stroke='%23075985' stroke-width='.8' stroke-linecap='round'/%3E%3Cpath d='M13 5.5l2 1M13 8.5l2 1M13 11.5l2 1M13 14.5l2 1' fill='none' stroke='%23075985' stroke-width='.8' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 @keyframes marquee {
   to { transform: translateX(-50%); }
