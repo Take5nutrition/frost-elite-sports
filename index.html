@@ -1124,63 +1124,82 @@ body::before {
 }
 
 @media (max-width: 680px) {
-  #homeEventsGrid { gap: 1.25rem; }
+  #homeEventsGrid { gap: 1.5rem; }
 
   .home-event-card {
-    grid-template-columns: 1fr;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border-color: rgba(56,189,248,.22);
   }
   .home-event-card::before { display: none; }
 
-  /* Date block becomes a horizontal banner at the top */
-  .home-event-date {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border-left: none;
-    border-bottom: 1px solid rgba(56,189,248,.15);
-    background: linear-gradient(90deg, rgba(56,189,248,.15) 0%, rgba(56,189,248,.04) 100%);
-  }
-  .home-event-date::before {
-    display: block;
-    position: absolute; top: 0; left: 0; right: 0; bottom: auto;
+  /* Top accent line */
+  .home-event-card::after {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--ice), var(--ice-2));
+    border-radius: 10px 10px 0 0;
   }
-  .home-event-date .mo { font-size: .55rem; letter-spacing: .2em; }
-  .home-event-date .dy { font-size: 2.4rem; margin: 0; }
-  .home-event-date .dow { margin-top: 0; }
 
-  /* Push cost to the right of the date block */
+  /* Date row: month · day · dow on one clean line */
+  .home-event-date {
+    order: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    padding: 1.25rem 1.5rem;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(56,189,248,.12);
+    background: linear-gradient(90deg, rgba(56,189,248,.12) 0%, transparent 100%);
+    min-width: unset;
+  }
+  .home-event-date::before { display: none; }
+
+  .home-event-date .mo { font-size: .6rem; letter-spacing: .2em; }
+  .home-event-date .dy { font-size: 2.8rem; line-height: 1; margin: 0; }
+  .home-event-date .dow { font-size: .55rem; }
+
   .home-event-date .cost {
-    margin-left: auto;
-    margin-top: 0;
-    padding-top: 0;
-    padding-left: 1rem;
-    border-top: none;
-    border-left: 1px solid rgba(56,189,248,.2);
-    width: auto;
-    font-size: 1.6rem;
-    text-align: right;
+    margin-top: 0; padding-top: 0;
+    border-top: none; border-left: none;
+    width: auto; font-size: 2rem;
+    color: var(--ice-soft);
   }
-  .home-event-date .cost-label { text-align: right; }
+  .home-event-date .cost-label { font-size: .5rem; }
 
-  /* Body gets full width with comfortable padding */
+  /* Body: generous padding, bigger text */
   .home-event-body {
-    padding: 1.25rem 1.25rem 0.5rem;
-    gap: .5rem;
+    order: 2;
+    padding: 1.5rem 1.5rem 1rem;
+    gap: .65rem;
   }
-  .home-event-title { font-size: 1.25rem; }
-  .home-event-meta { gap: .25rem .75rem; }
+  .home-event-title { font-size: 1.35rem; line-height: 1.15; }
+  .home-event-meta {
+    flex-direction: column;
+    gap: .45rem;
+  }
+  .home-event-meta span { font-size: .68rem; }
+  .home-event-meta span svg { width: 13px; height: 13px; opacity: .6; }
 
-  /* Actions full width */
+  /* Buttons: full width, big tap targets */
   .home-event-actions {
-    padding: 1rem 1.25rem 1.25rem;
+    order: 3;
+    flex-direction: column;
+    gap: .6rem;
+    padding: 0 1.5rem 1.5rem;
     margin-top: 0;
   }
-  .home-event-actions .btn { flex: 1; justify-content: center; font-size: .62rem; padding: 11px 16px; }
+  .home-event-actions .btn {
+    width: 100%;
+    justify-content: center;
+    font-size: .68rem;
+    padding: 14px 20px;
+    border-radius: 6px;
+  }
 }
 
 /* Event notification banner */
