@@ -594,15 +594,15 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
+const mobileNav = document.querySelector('.nav');
 menuToggle?.addEventListener('click', () => {
   menuToggle.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
+  mobileNav.classList.toggle('open');
 });
-mobileMenu?.addEventListener('click', e => {
+mobileNav?.addEventListener('click', e => {
   if (e.target.tagName === 'A') {
     menuToggle.classList.remove('open');
-    mobileMenu.classList.remove('open');
+    mobileNav.classList.remove('open');
   }
 });
 

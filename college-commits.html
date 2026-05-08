@@ -533,9 +533,9 @@ window.addEventListener('scroll', () => header.classList.toggle('scrolled', wind
 header.classList.toggle('scrolled', window.scrollY > 40);
 
 const menuToggle = document.getElementById('menuToggle');
-const mobileMenu = document.getElementById('mobileMenu');
-menuToggle?.addEventListener('click', () => { menuToggle.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
-mobileMenu?.addEventListener('click', e => { if (e.target.tagName === 'A') { menuToggle.classList.remove('open'); mobileMenu.classList.remove('open'); } });
+const mobileNav = document.querySelector('.nav');
+menuToggle?.addEventListener('click', () => { menuToggle.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+mobileNav?.addEventListener('click', e => { if (e.target.tagName === 'A') { menuToggle.classList.remove('open'); mobileNav.classList.remove('open'); } });
 
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });

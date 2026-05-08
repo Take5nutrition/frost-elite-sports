@@ -502,6 +502,11 @@ const header = document.getElementById('header');
 window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 header.classList.toggle('scrolled', window.scrollY > 40);
 
+const menuToggle = document.getElementById('menuToggle');
+const mobileNav = document.querySelector('.nav');
+menuToggle?.addEventListener('click', () => { menuToggle.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+mobileNav?.addEventListener('click', e => { if (e.target.tagName === 'A') { menuToggle.classList.remove('open'); mobileNav.classList.remove('open'); } });
+
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
 }, { threshold: 0.1 });
