@@ -1560,6 +1560,19 @@ body::before {
   .fb-phone-glass  { border-radius: 32px; }
   .fb-embed-loading { border-radius: 32px; }
 }
+
+/* Covers the "X followers" text inside the FB embed header —
+   white matches the FB page header background exactly */
+.fb-followers-mask {
+  position: absolute;
+  top: 38px;
+  left: 58px;
+  right: 58px;
+  height: 20px;
+  background: #fff;
+  z-index: 6;
+  pointer-events: none;
+}
 </style>
 </head>
 
@@ -1925,6 +1938,10 @@ body::before {
         </div>
         <div class="fb-stats">
           <div class="fb-stat">
+            <span class="fb-stat-num">1,000+</span>
+            <span class="fb-stat-label">Facebook Followers</span>
+          </div>
+          <div class="fb-stat">
             <span class="fb-stat-num">9+</span>
             <span class="fb-stat-label">Years Active</span>
           </div>
@@ -1953,6 +1970,8 @@ body::before {
           <div class="fb-phone-screen" id="fbEmbedShell">
             <!-- Home indicator inside screen (matches real iPhone) -->
             <div class="fb-phone-home"></div>
+            <!-- White mask over the "X followers" line in the FB embed header -->
+            <div class="fb-followers-mask"></div>
             <!-- Glass reflection -->
             <div class="fb-phone-glass"></div>
             <!-- Loading placeholder -->
