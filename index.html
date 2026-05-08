@@ -1322,191 +1322,201 @@ body::before {
   margin-top: .35rem;
 }
 
-/* Phone mockup container — perspective enables 3-D hover */
+/* Phone mockup — perspective on parent for 3-D tilt */
 .fb-embed-col {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  perspective: 1200px;
+  perspective: 1400px;
 }
 
-/* ---- Frame ---- */
+/* ===== FRAME ===== */
 .fb-phone {
   position: relative;
   width: 340px;
   flex-shrink: 0;
-  /* Space-black titanium frame */
+  /* Space Black titanium: dark body + subtle directional catch-light */
   background:
-    linear-gradient(168deg,
-      rgba(255,255,255,.035) 0%,
-      rgba(255,255,255,.01)  30%,
-      transparent            60%,
-      rgba(255,255,255,.02) 100%),
-    linear-gradient(155deg,
-      #2e2e40 0%,
-      #1c1c2c 25%,
-      #141420 55%,
-      #202030 80%,
-      #2a2a3c 100%);
+    radial-gradient(ellipse 60% 40% at 22% 14%, rgba(255,255,255,.07), transparent 65%),
+    linear-gradient(160deg,
+      #272730 0%,
+      #1a1a22 15%,
+      #111116 35%,
+      #0d0d11 52%,
+      #121217 68%,
+      #1a1a22 82%,
+      #232330 100%);
   border-radius: 54px;
-  /* top bezel houses the dynamic island; sides and bottom are thin */
-  padding: 56px 13px 20px;
+  /* top bezel holds the island; bottom = 0, chin div handles it */
+  padding: 56px 12px 0;
   box-shadow:
-    /* outer edge highlight — top-left catch light */
-    inset 0   0 0 1px rgba(255,255,255,.14),
-    /* inner edge shadow */
-    inset 0  -2px 4px rgba(0,0,0,.55),
-    inset 2px 0   4px rgba(0,0,0,.2),
+    /* titanium edge: bright top-left chamfer */
+    inset  1px  1px 0   rgba(255,255,255,.22),
+    /* dark bottom-right chamfer */
+    inset -1px -1px 0   rgba(0,0,0,.55),
+    /* glass-over-frame recessed rim */
+    inset  0    0   0 1px rgba(0,0,0,.7),
+    /* hard outer edge line */
+    0 0 0 1px rgba(0,0,0,.9),
     /* main drop shadow */
-    0 70px 140px -25px rgba(0,0,0,.95),
-    0 30px 70px  -20px rgba(0,0,0,.7),
-    /* subtle lateral depth */
-    14px 0 40px -16px rgba(0,0,0,.45),
-   -14px 0 40px -16px rgba(0,0,0,.45),
-    /* ice glow */
-    0 0 80px -25px rgba(56,189,248,.12);
+    0  65px 130px -22px rgba(0,0,0,.98),
+    0  28px  65px -16px rgba(0,0,0,.78),
+    /* phone thickness (lateral) */
+    10px  0 32px -12px rgba(0,0,0,.55),
+   -10px  0 32px -12px rgba(0,0,0,.55),
+    /* underside bounce light (desk reflection) */
+    0 2px 12px -4px rgba(56,189,248,.06);
   transition: transform .5s cubic-bezier(.2,.7,.2,1),
               box-shadow .5s cubic-bezier(.2,.7,.2,1);
   transform-style: preserve-3d;
 }
 .fb-phone:hover {
-  transform: translateY(-10px) rotateY(-5deg) rotateX(2deg);
+  transform: translateY(-10px) rotateY(-6deg) rotateX(2deg);
   box-shadow:
-    inset 0   0 0 1px rgba(255,255,255,.18),
-    inset 0  -2px 4px rgba(0,0,0,.55),
-    inset 2px 0   4px rgba(0,0,0,.2),
-    0 90px 160px -25px rgba(0,0,0,.95),
-    0 40px 90px  -20px rgba(0,0,0,.7),
-    20px 0 50px -16px rgba(0,0,0,.45),
-   -20px 0 50px -16px rgba(0,0,0,.45),
-    0 0 100px -20px rgba(56,189,248,.2);
+    inset  1px  1px 0   rgba(255,255,255,.26),
+    inset -1px -1px 0   rgba(0,0,0,.55),
+    inset  0    0   0 1px rgba(0,0,0,.7),
+    0 0 0 1px rgba(0,0,0,.9),
+    0  85px 160px -22px rgba(0,0,0,.98),
+    0  38px  85px -16px rgba(0,0,0,.78),
+    16px  0 45px -12px rgba(0,0,0,.55),
+   -16px  0 45px -12px rgba(0,0,0,.55),
+    0 0 80px -18px rgba(56,189,248,.18);
 }
 
-/* ---- Physical buttons (HTML elements for realistic sizing) ---- */
-.fb-btn {
-  position: absolute;
-  border-radius: 3px;
+/* ===== SIDE BUTTONS ===== */
+.fb-btn { position: absolute; }
+.fb-btn-mute, .fb-btn-vol-up, .fb-btn-vol-down {
+  left: -7px;
+  width: 7px;
+  background: linear-gradient(to right, #090910 0%, #151520 55%, #1e1e2c 100%);
+  border-radius: 3px 0 0 3px;
   box-shadow:
-    inset 0  1px 1px rgba(255,255,255,.08),
-    inset 0 -1px 1px rgba(0,0,0,.5),
-    -1px 0 3px rgba(0,0,0,.4);
+    inset 0  1px 0 rgba(255,255,255,.11),
+    inset 0 -1px 0 rgba(0,0,0,.65),
+    -1px 0 0 rgba(0,0,0,.8),
+    -4px 2px 10px rgba(0,0,0,.45);
 }
-/* Mute/ringer toggle */
-.fb-btn-mute {
-  left: -5px; top: 96px;
-  width: 5px; height: 22px;
-  background: linear-gradient(90deg, #111120, #222234);
-  border-radius: 3px 0 0 3px;
-}
-/* Volume up */
-.fb-btn-vol-up {
-  left: -5px; top: 136px;
-  width: 5px; height: 40px;
-  background: linear-gradient(90deg, #111120, #222234);
-  border-radius: 3px 0 0 3px;
-}
-/* Volume down */
-.fb-btn-vol-down {
-  left: -5px; top: 190px;
-  width: 5px; height: 40px;
-  background: linear-gradient(90deg, #111120, #222234);
-  border-radius: 3px 0 0 3px;
-}
-/* Power / sleep-wake */
+.fb-btn-mute    { top: 94px;  height: 22px; }
+.fb-btn-vol-up  { top: 132px; height: 42px; }
+.fb-btn-vol-down{ top: 188px; height: 42px; }
 .fb-btn-power {
-  right: -5px; top: 160px;
-  width: 5px; height: 72px;
-  background: linear-gradient(270deg, #111120, #222234);
+  right: -7px; top: 155px;
+  width: 7px; height: 74px;
+  background: linear-gradient(to left, #090910 0%, #151520 55%, #1e1e2c 100%);
   border-radius: 0 3px 3px 0;
   box-shadow:
-    inset 0  1px 1px rgba(255,255,255,.08),
-    inset 0 -1px 1px rgba(0,0,0,.5),
-    1px 0 3px rgba(0,0,0,.4);
+    inset 0  1px 0 rgba(255,255,255,.11),
+    inset 0 -1px 0 rgba(0,0,0,.65),
+    1px 0 0 rgba(0,0,0,.8),
+    4px 2px 10px rgba(0,0,0,.45);
 }
 
-/* ---- Screen area (thin-bezel, nearly edge-to-edge) ---- */
+/* ===== DYNAMIC ISLAND (on frame above screen) ===== */
+.fb-phone-island {
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 118px; height: 36px;
+  background: #030308;
+  border-radius: 999px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 14px;
+  box-shadow:
+    inset 0 1px 5px rgba(0,0,0,.95),
+    0 0 0 1px rgba(0,0,0,.7),
+    0 2px 4px rgba(0,0,0,.5);
+}
+.fb-phone-camera {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #1d3f5c, #040e1c);
+  box-shadow: 0 0 0 2.5px #010409, 0 0 0 3.5px rgba(255,255,255,.04), inset 0 0 8px rgba(0,0,0,.8);
+  position: relative;
+}
+.fb-phone-camera::before {
+  content: "";
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.5), transparent 70%);
+  top: 2px; left: 2px;
+}
+
+/* ===== SCREEN ===== */
 .fb-phone-screen {
   background: #fff;
   border-radius: 42px;
   overflow: hidden;
   height: 610px;
   position: relative;
-  /* subtle inner shadow for screen-glass depth */
+  /* screen glass recessed in frame channel */
   box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,.18),
-    inset 0 2px 8px rgba(0,0,0,.12);
+    inset 0 0 0 1px rgba(0,0,0,.3),
+    inset 0 2px 8px rgba(0,0,0,.14),
+    inset 0 0 0 .5px rgba(255,255,255,.04);
 }
 
-/* ---- Dynamic Island — on the frame above the screen ---- */
-.fb-phone-island {
+/* Home indicator lives inside the screen (matches real iPhone) */
+.fb-phone-home {
   position: absolute;
-  top: 12px;
-  left: 50%;
+  bottom: 8px; left: 50%;
   transform: translateX(-50%);
-  width: 114px;
-  height: 34px;
-  background: #060610;
+  width: 132px; height: 5px;
+  background: rgba(0,0,0,.14);
   border-radius: 999px;
-  z-index: 15;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 13px;
-  box-shadow:
-    inset 0 1px 4px rgba(0,0,0,.9),
-    0 1px 2px rgba(0,0,0,.6),
-    0 0 0 1px rgba(0,0,0,.6);
-}
-/* Camera lens */
-.fb-phone-camera {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 38% 32%, #1c3c58, #05111e);
-  box-shadow:
-    0 0 0 2px #02080f,
-    0 0 0 3px rgba(255,255,255,.04),
-    inset 0 0 6px rgba(0,0,0,.7);
-  position: relative;
-}
-/* Camera lens glint */
-.fb-phone-camera::after {
-  content: "";
-  position: absolute;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,.45), transparent);
-  top: 1px; left: 1px;
+  z-index: 18;
+  pointer-events: none;
 }
 
-/* ---- Glass reflection overlay — sits above iframe, pointer-events off ---- */
+/* Glass reflection over screen content */
 .fb-phone-glass {
   position: absolute;
   inset: 0;
   border-radius: 42px;
   background: linear-gradient(
-    140deg,
-    rgba(255,255,255,.09) 0%,
-    rgba(255,255,255,.04) 18%,
-    transparent           42%,
-    transparent           72%,
+    138deg,
+    rgba(255,255,255,.1)  0%,
+    rgba(255,255,255,.04) 20%,
+    transparent           44%,
+    transparent           74%,
     rgba(255,255,255,.03) 100%
   );
   pointer-events: none;
-  z-index: 14;
+  z-index: 16;
 }
 
-/* ---- Home indicator ---- */
-.fb-phone-home {
-  width: 134px;
-  height: 5px;
-  background: rgba(255,255,255,.26);
-  border-radius: 999px;
-  margin: 9px auto 0;
-  box-shadow: 0 0 10px rgba(255,255,255,.08);
+/* ===== BOTTOM CHIN (speaker + USB-C) ===== */
+.fb-phone-chin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 10px 24px 15px;
+}
+.fb-phone-speaker {
+  width: 52px; height: 7px;
+  /* repeating dot pattern */
+  background-image: radial-gradient(circle, rgba(255,255,255,.24) 1.8px, transparent 1.8px);
+  background-size: 8px 7px;
+  background-repeat: repeat-x;
+  background-position: center;
+  border-radius: 4px;
+}
+.fb-phone-usbc {
+  width: 30px; height: 10px;
+  background: #05050a;
+  border-radius: 5px;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.9),
+    inset 0 -1px 1px rgba(0,0,0,.4),
+    0 1px 1px rgba(255,255,255,.07);
 }
 
-/* ---- Loading state ---- */
+/* ===== LOADING STATE ===== */
 .fb-embed-loading {
   position: absolute;
   inset: 0;
@@ -1519,7 +1529,7 @@ body::before {
   pointer-events: none;
   transition: opacity .4s ease;
   border-radius: 42px;
-  z-index: 3;
+  z-index: 4;
 }
 .fb-embed-loading.hidden { opacity: 0; pointer-events: none; }
 .fb-embed-loading svg { opacity: .4; }
@@ -1535,16 +1545,19 @@ body::before {
 
 @media (max-width: 900px) {
   .fb-grid { grid-template-columns: 1fr; }
-  .fb-phone { width: 300px; border-radius: 48px; padding: 52px 11px 18px; }
-  .fb-phone-screen { height: 540px; border-radius: 36px; }
-  .fb-phone-glass { border-radius: 36px; }
+  /* Phone first on mobile, copy/stats below */
+  .fb-embed-col { order: 1; }
+  .fb-copy      { order: 2; }
+  .fb-phone { width: 300px; border-radius: 48px; padding: 52px 11px 0; }
+  .fb-phone-screen { height: 530px; border-radius: 36px; }
+  .fb-phone-glass  { border-radius: 36px; }
   .fb-embed-loading { border-radius: 36px; }
 }
 @media (max-width: 480px) {
   .fb-stats { gap: 2rem; }
-  .fb-phone { width: 272px; border-radius: 44px; padding: 50px 10px 16px; }
-  .fb-phone-screen { height: 490px; border-radius: 32px; }
-  .fb-phone-glass { border-radius: 32px; }
+  .fb-phone { width: 268px; border-radius: 44px; padding: 50px 10px 0; }
+  .fb-phone-screen { height: 480px; border-radius: 32px; }
+  .fb-phone-glass  { border-radius: 32px; }
   .fb-embed-loading { border-radius: 32px; }
 }
 </style>
@@ -1912,7 +1925,7 @@ body::before {
         </div>
         <div class="fb-stats">
           <div class="fb-stat">
-            <span class="fb-stat-num">557</span>
+            <span class="fb-stat-num">1,000+</span>
             <span class="fb-stat-label">Facebook Followers</span>
           </div>
           <div class="fb-stat">
@@ -1940,9 +1953,11 @@ body::before {
             <div class="fb-phone-camera"></div>
           </div>
 
-          <!-- Screen — content starts at top, unobstructed -->
+          <!-- Screen -->
           <div class="fb-phone-screen" id="fbEmbedShell">
-            <!-- Glass reflection overlay -->
+            <!-- Home indicator inside screen (matches real iPhone) -->
+            <div class="fb-phone-home"></div>
+            <!-- Glass reflection -->
             <div class="fb-phone-glass"></div>
             <!-- Loading placeholder -->
             <div class="fb-embed-loading" id="fbLoading">
@@ -1951,7 +1966,7 @@ body::before {
               </svg>
               <p>Loading feed…</p>
             </div>
-            <!-- FB Page Plugin — full header, cover photo, page name all visible -->
+            <!-- FB Page Plugin — full header, cover photo, page name visible -->
             <div class="fb-page"
                  data-href="https://www.facebook.com/frostelite2.0"
                  data-tabs="timeline"
@@ -1967,8 +1982,12 @@ body::before {
             </div>
           </div>
 
-          <!-- Home indicator -->
-          <div class="fb-phone-home"></div>
+          <!-- Bottom chin: symmetrical speakers + USB-C -->
+          <div class="fb-phone-chin">
+            <div class="fb-phone-speaker"></div>
+            <div class="fb-phone-usbc"></div>
+            <div class="fb-phone-speaker"></div>
+          </div>
         </div>
       </div>
 
