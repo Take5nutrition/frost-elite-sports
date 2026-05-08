@@ -1349,8 +1349,8 @@ body::before {
       #202030 80%,
       #2a2a3c 100%);
   border-radius: 54px;
-  /* thin top bezel, sides, bottom */
-  padding: 16px 13px 20px;
+  /* top bezel houses the dynamic island; sides and bottom are thin */
+  padding: 56px 13px 20px;
   box-shadow:
     /* outer edge highlight — top-left catch light */
     inset 0   0 0 1px rgba(255,255,255,.14),
@@ -1437,10 +1437,10 @@ body::before {
     inset 0 2px 8px rgba(0,0,0,.12);
 }
 
-/* ---- Dynamic Island — lives inside the screen ---- */
+/* ---- Dynamic Island — on the frame above the screen ---- */
 .fb-phone-island {
   position: absolute;
-  top: 14px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   width: 114px;
@@ -1535,14 +1535,14 @@ body::before {
 
 @media (max-width: 900px) {
   .fb-grid { grid-template-columns: 1fr; }
-  .fb-phone { width: 300px; border-radius: 48px; padding: 14px 11px 18px; }
+  .fb-phone { width: 300px; border-radius: 48px; padding: 52px 11px 18px; }
   .fb-phone-screen { height: 540px; border-radius: 36px; }
   .fb-phone-glass { border-radius: 36px; }
   .fb-embed-loading { border-radius: 36px; }
 }
 @media (max-width: 480px) {
   .fb-stats { gap: 2rem; }
-  .fb-phone { width: 272px; border-radius: 44px; }
+  .fb-phone { width: 272px; border-radius: 44px; padding: 50px 10px 16px; }
   .fb-phone-screen { height: 490px; border-radius: 32px; }
   .fb-phone-glass { border-radius: 32px; }
   .fb-embed-loading { border-radius: 32px; }
@@ -1935,12 +1935,13 @@ body::before {
           <div class="fb-btn fb-btn-vol-down"></div>
           <div class="fb-btn fb-btn-power"></div>
 
-          <!-- Screen — dynamic island and content live inside -->
+          <!-- Dynamic island sits on the frame, above the screen -->
+          <div class="fb-phone-island">
+            <div class="fb-phone-camera"></div>
+          </div>
+
+          <!-- Screen — content starts at top, unobstructed -->
           <div class="fb-phone-screen" id="fbEmbedShell">
-            <!-- Dynamic island with camera -->
-            <div class="fb-phone-island">
-              <div class="fb-phone-camera"></div>
-            </div>
             <!-- Glass reflection overlay -->
             <div class="fb-phone-glass"></div>
             <!-- Loading placeholder -->
@@ -1950,16 +1951,16 @@ body::before {
               </svg>
               <p>Loading feed…</p>
             </div>
-            <!-- FB Page Plugin — fills screen width, height matches screen -->
+            <!-- FB Page Plugin — full header, cover photo, page name all visible -->
             <div class="fb-page"
                  data-href="https://www.facebook.com/frostelite2.0"
                  data-tabs="timeline"
                  data-width=""
                  data-height="610"
-                 data-small-header="true"
+                 data-small-header="false"
                  data-adapt-container-width="true"
                  data-hide-cover="false"
-                 data-show-facepile="false">
+                 data-show-facepile="true">
               <blockquote cite="https://www.facebook.com/frostelite2.0" class="fb-xfbml-parse-ignore">
                 <a href="https://www.facebook.com/frostelite2.0">Frost Elite 2.0</a>
               </blockquote>
