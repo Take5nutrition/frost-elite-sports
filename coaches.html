@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#020617" />
+<title>Coaches — Frost Elite Sports</title>
+<meta name="description" content="Meet Landon and Samantha Frost — the coaches behind Frost Elite Sports. Experienced, scholarship-level athletes turned elite trainers." />
+
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --ice:       #38BDF8;
+  --ice-2:     #0EA5E9;
+  --ice-soft:  #7DD3FC;
+  --ice-glow:  #E0F2FE;
+  --ink:       #020617;
+  --ink-2:     #07101F;
+  --ink-3:     #0C1626;
+  --black:     #01040a;
+  --bone:      #F4F1EA;
+  --bone-2:    #DDD6C8;
+  --text:      #EEF2F7;
+  --muted:     #9AA8BC;
+  --line:      rgba(56,189,248,0.20);
+  --line-soft: rgba(255,255,255,0.08);
+
+  --display: "Bebas Neue", "Oswald", "Arial Narrow", sans-serif;
+  --athletic: "Oswald", "Bebas Neue", sans-serif;
+  --sans:  "Inter Tight", system-ui, -apple-system, sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --maxw: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 78px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+::selection { background: var(--ice); color: var(--ink); }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation: grain 8s steps(8) infinite;
+}
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10% { transform: translate(-3%,-2%); }
+  20% { transform: translate(2%,3%); }
+  30% { transform: translate(-4%,1%); }
+  40% { transform: translate(3%,-3%); }
+  50% { transform: translate(-2%,4%); }
+  60% { transform: translate(4%,-2%); }
+  70% { transform: translate(-3%,3%); }
+  80% { transform: translate(2%,-4%); }
+  90% { transform: translate(-4%,2%); }
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: .88;
+  color: var(--bone);
+  text-transform: uppercase;
+}
+.display em {
+  font-family: var(--athletic);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ice-soft);
+}
+.kicker {
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ice);
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+}
+.kicker::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--ice);
+  display: inline-block;
+}
+.label {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ============== HEADER ============== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(2,6,23,.55) 0%, rgba(2,6,23,0) 100%);
+  border-bottom: 1px solid transparent;
+  transition: background .4s var(--ease), border-color .4s var(--ease), backdrop-filter .4s var(--ease);
+}
+.header.scrolled {
+  background: rgba(2,6,23,.88);
+  border-bottom-color: rgba(56,189,248,.12);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 1px 40px rgba(0,0,0,.4);
+}
+.header-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  transition: opacity .3s var(--ease);
+}
+.brand:hover { opacity: .85; }
+.brand img {
+  height: 62px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,.25));
+}
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+.nav a {
+  font-family: var(--athletic);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--bone);
+  position: relative;
+  padding: 6px 0;
+  transition: color .3s var(--ease);
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width .35s var(--ease);
+}
+.nav a:hover { color: var(--ice); }
+.nav a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: var(--athletic);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ice) !important;
+  padding: 6px 0;
+  position: relative;
+  transition: color .3s var(--ease);
+}
+.nav-cta::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width .35s var(--ease);
+}
+.nav-cta:hover::after { width: 100%; }
+.menu-toggle {
+  display: none;
+  width: 32px; height: 32px;
+  position: relative;
+}
+.menu-toggle span {
+  position: absolute;
+  left: 4px; right: 4px;
+  height: 1.5px;
+  background: var(--bone);
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+.menu-toggle span:nth-child(1) { top: 11px; }
+.menu-toggle span:nth-child(2) { top: 16px; }
+.menu-toggle span:nth-child(3) { top: 21px; }
+.menu-toggle.open span:nth-child(1) { top: 16px; transform: rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { top: 16px; transform: rotate(-45deg); }
+
+/* ============== PAGE HERO ============== */
+.page-hero {
+  position: relative;
+  padding: calc(var(--header-h) + 6rem) 0 5rem;
+  background:
+    radial-gradient(ellipse 70% 60% at 60% 0%, rgba(56,189,248,.1), transparent 60%),
+    var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0 40px,
+    rgba(56,189,248,.018) 40px 41px
+  );
+  pointer-events: none;
+}
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.page-hero h1 {
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.page-hero p {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: var(--bone-2);
+  max-width: 52ch;
+  line-height: 1.65;
+}
+
+/* ============== COACH PROFILE ============== */
+.coach-section {
+  padding: clamp(5rem, 9vw, 8rem) 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.coach-section:last-of-type { border-bottom: 0; }
+.coach-section:nth-child(even) { background: var(--ink-2); }
+
+.coach-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+@media (min-width: 960px) {
+  .coach-layout {
+    grid-template-columns: 340px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+}
+
+.coach-photo {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+.coach-photo-frame {
+  aspect-ratio: 3/4;
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  overflow: hidden;
+  position: relative;
+}
+.coach-photo-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(.2) contrast(1.05);
+}
+.coach-photo-frame .placeholder {
+  width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 12px, rgba(56,189,248,.04) 12px 13px),
+    linear-gradient(180deg, var(--ink-2), var(--ink-3));
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1rem;
+}
+.coach-photo-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: 1rem;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  color: var(--bone-2);
+}
+.tag-ice {
+  border-color: rgba(56,189,248,.4);
+  color: var(--ice);
+}
+
+.coach-body {}
+.coach-name-block {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.coach-name-block h2 {
+  font-family: var(--display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  letter-spacing: 0.01em;
+  line-height: .9;
+  color: var(--bone);
+  text-transform: uppercase;
+  margin: .75rem 0 .5rem;
+}
+.coach-name-block h2 em {
+  font-family: var(--athletic);
+  font-style: italic;
+  color: var(--ice-soft);
+}
+.coach-title {
+  font-family: var(--athletic);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.coach-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.coach-bio p {
+  color: var(--bone-2);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+/* Mentors */
+.mentors {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line-soft);
+}
+.mentors-title {
+  font-family: var(--athletic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: 1.5rem;
+}
+.mentor-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.mentor {
+  display: grid;
+  grid-template-columns: 3px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.mentor-bar {
+  width: 3px;
+  height: 100%;
+  min-height: 40px;
+  background: linear-gradient(180deg, var(--ice), transparent);
+  border-radius: 999px;
+  margin-top: 4px;
+}
+.mentor-name {
+  font-family: var(--athletic);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: .3rem;
+}
+.mentor-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* College placements */
+.placements {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line-soft);
+}
+.placements-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--bone);
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.placements-sub {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+.division-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 600px) {
+  .division-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 900px) {
+  .division-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.division-block {
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  padding: 1.5rem;
+}
+.division-label {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1rem;
+  padding-bottom: .75rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+.division-schools {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.division-schools li {
+  font-size: .9rem;
+  color: var(--bone-2);
+  padding-left: .75rem;
+  position: relative;
+  line-height: 1.4;
+}
+.division-schools li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 4px; height: 4px;
+  background: var(--ice);
+  border-radius: 50%;
+  opacity: .6;
+}
+
+/* CTA strip */
+.coach-cta {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .coach-cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.coach-cta-text h4 {
+  font-family: var(--athletic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: .25rem;
+}
+.coach-cta-text p {
+  font-size: .9rem;
+  color: var(--muted);
+}
+.coach-cta-btns {
+  display: flex;
+  gap: .75rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 13px 24px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+}
+.btn-primary {
+  background: var(--bone);
+  color: var(--ink);
+}
+.btn-primary:hover {
+  background: var(--ice);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -10px rgba(56,189,248,.55);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--bone);
+  border: 1px solid var(--line-soft);
+}
+.btn-ghost:hover {
+  border-color: var(--ice);
+  color: var(--ice);
+  transform: translateY(-2px);
+}
+
+/* ============== FOOTER ============== */
+.footer {
+  background: var(--black);
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--line-soft);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.footer h5 {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+.footer ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+.footer ul a {
+  font-size: .95rem;
+  color: var(--bone-2);
+  transition: color .25s var(--ease), padding-left .25s var(--ease);
+}
+.footer ul a:hover { color: var(--ice); padding-left: 6px; }
+.footer-brand .display { font-size: clamp(2.2rem, 3.5vw, 3rem); margin-bottom: .75rem; }
+.footer-brand p { color: var(--muted); max-width: 32ch; font-size: .9rem; line-height: 1.6; }
+.footer-bottom {
+  border-top: 1px solid var(--line-soft);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-bottom a:hover { color: var(--ice); }
+
+/* ============== SCROLL REVEAL ============== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============== MOBILE NAV ============== */
+@media (max-width: 820px) {
+  .nav { gap: 1.2rem; flex-wrap: wrap; justify-content: flex-end; }
+  .nav a { font-size: .78rem; }
+  .coach-photo { position: static; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  body::before { animation: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index (1).html" class="brand">
+      <img src="Public/IMG_9206.PNG" alt="Frost Elite" style="height:62px;width:auto;" />
+    </a>
+    <nav class="nav">
+      <a href="about-our-program.html">About</a>
+      <a href="teams.html">Teams</a>
+      <a href="coaches.html" style="color:var(--ice);">Coaches</a>
+      <a href="index (1).html#contact">Contact</a>
+      <a href="college-commits.html">Commits</a>
+      <a href="events.html">Events</a>
+      <a href="book-an-appointment.html" class="nav-cta">Book Training</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="kicker">The Staff</div>
+    <h1 class="display">Meet the <em>Leaders</em><br>Behind Frost Elite</h1>
+    <p>Experienced coaching, high standards, and real player development — built on detail, effort, and a clear path to the next level.</p>
+  </div>
+</section>
+
+<!-- LANDON FROST -->
+<section class="coach-section">
+  <div class="wrap">
+    <div class="coach-layout">
+
+      <div class="coach-photo reveal">
+        <div class="coach-photo-frame">
+          <img src="assets/img/coach-landon.jpg" alt="Landon Frost"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+          <div class="placeholder" style="display:none;">[ Landon Frost<br/>assets/img/coach-landon.jpg ]</div>
+        </div>
+        <div class="coach-photo-tags">
+          <span class="tag tag-ice">Scholarship Athlete</span>
+          <span class="tag">Baseball + Softball</span>
+          <span class="tag">Performance Trainer</span>
+        </div>
+      </div>
+
+      <div class="coach-body">
+        <div class="coach-name-block reveal">
+          <div class="kicker">Owner & Head Coach</div>
+          <h2>Landon <em>Frost</em></h2>
+          <div class="coach-title">Owner & Head Coach · Frost Elite Sports</div>
+        </div>
+
+        <div class="coach-bio reveal">
+          <p>I'm a former multi-sport, scholarship-level athlete turned performance trainer, focused on helping baseball and softball players improve their skills and reach their potential. With experience in high-level competition, advanced instruction, and hands-on coaching, I work to provide athletes with practical, detail-oriented training in a supportive, high-energy environment.</p>
+          <p>My playing success led to scholarship offers from multiple schools across different divisions. After an injury shifted my path, I continued my career at Corban University, where I was a four-year starting outfielder, earned the Cascade Conference Golden Glove Award, and played for the Bend Elks of the West Coast League to pursue getting drafted. I graduated in 2016 with a degree in Business and Sports Management.</p>
+        </div>
+
+        <div class="mentors reveal">
+          <div class="mentors-title">Shaped by elite mentors</div>
+          <div class="mentor-list">
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Jack Intelcofer</div>
+                <div class="mentor-desc">Former MLB player and MLB manager</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Ryan Gibson</div>
+                <div class="mentor-desc">Former Oregon State University player and current Oregon State coach</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Jeff McKay</div>
+                <div class="mentor-desc">Founder of Baseball Northwest, Tampa Bay Rays scout, former Corban University head coach, and former Royals scout</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Jacob Garsez</div>
+                <div class="mentor-desc">Head University of Oregon Tech coach, Head coach at Antelope Valley University</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Allen Embree</div>
+                <div class="mentor-desc">Former MLB player and World Series winner with the Red Sox</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Dean Stiles</div>
+                <div class="mentor-desc">Former University of Oregon coach and current San Jose State coach</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Scott Dewitt</div>
+                <div class="mentor-desc">Former minor league player and trainer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placements reveal">
+          <h3 class="placements-title">College Athlete Development</h3>
+          <p class="placements-sub">Athletes I've trained have advanced to programs across the country at every collegiate level.</p>
+
+          <div class="division-grid">
+            <div class="division-block">
+              <div class="division-label">NCAA Division I</div>
+              <ul class="division-schools">
+                <li>Florida International University</li>
+                <li>New Mexico State University</li>
+                <li>Morgan State University</li>
+                <li>University of Nevada, Reno</li>
+                <li>University of Oregon Club</li>
+                <li>University of Portland</li>
+              </ul>
+            </div>
+            <div class="division-block">
+              <div class="division-label">NCAA Division II</div>
+              <ul class="division-schools">
+                <li>Black Hills State University</li>
+                <li>Southwest Minnesota State University</li>
+              </ul>
+            </div>
+            <div class="division-block">
+              <div class="division-label">NCAA Division III</div>
+              <ul class="division-schools">
+                <li>Linfield University</li>
+                <li>Pacific University</li>
+                <li>Pacific Lutheran University</li>
+                <li>Occidental University</li>
+                <li>Dominican University</li>
+                <li>Whitworth University</li>
+                <li>North Park University</li>
+                <li>University of Dubuque</li>
+                <li>Catholic University of America</li>
+                <li>Parks University</li>
+              </ul>
+            </div>
+            <div class="division-block">
+              <div class="division-label">NAIA</div>
+              <ul class="division-schools">
+                <li>Arizona Christian University</li>
+                <li>Bushnell University</li>
+                <li>Corban University</li>
+                <li>Central Methodist University</li>
+                <li>Warner Pacific University</li>
+                <li>Waldorf University</li>
+              </ul>
+            </div>
+            <div class="division-block" style="grid-column: span 1;">
+              <div class="division-label">NJCAA / Community Colleges</div>
+              <ul class="division-schools">
+                <li>Chemeketa Community College</li>
+                <li>Clark Community College</li>
+                <li>Columbia Basin College</li>
+                <li>Lower Columbia College</li>
+                <li>Mt. Hood Community College</li>
+                <li>Monterey Peninsula College</li>
+                <li>Pierce College</li>
+                <li>Shoreline College</li>
+                <li>Yakima Valley College</li>
+                <li>Clackamas Community College</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-cta reveal">
+          <div class="coach-cta-text">
+            <h4>Train With Landon</h4>
+            <p>Book a session or explore training options.</p>
+          </div>
+          <div class="coach-cta-btns">
+            <a href="book-an-appointment.html" class="btn btn-primary">Book Training →</a>
+            <a href="index (1).html#programs" class="btn btn-ghost">View Programs</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAMANTHA FROST -->
+<section class="coach-section">
+  <div class="wrap">
+    <div class="coach-layout">
+
+      <div class="coach-photo reveal">
+        <div class="coach-photo-frame">
+          <img src="assets/img/coach-samantha.jpg" alt="Samantha Frost"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+          <div class="placeholder" style="display:none;">[ Samantha Frost<br/>assets/img/coach-samantha.jpg ]</div>
+        </div>
+        <div class="coach-photo-tags">
+          <span class="tag tag-ice">Pitcher of the Year — 4 Years</span>
+          <span class="tag">Clackamas HS Alum</span>
+          <span class="tag">Pitching Specialist</span>
+        </div>
+      </div>
+
+      <div class="coach-body">
+        <div class="coach-name-block reveal">
+          <div class="kicker">Founder & Head Coach</div>
+          <h2>Samantha <em>Frost</em></h2>
+          <div class="coach-title">Founder · Head Coach · Pitching Specialist</div>
+        </div>
+
+        <div class="coach-bio reveal">
+          <p>Softball has been my passion for as long as I can remember, shaping who I am both on and off the field. Growing up in Clackamas and playing at Clackamas High School, I poured every ounce of energy into the game, earning Pitcher of the Year honors all four years, multiple All-Conference and All-State accolades, and setting the school's strikeout record. Every pitch, every game, and every challenge fueled my drive to compete at the highest level and inspired me to help others reach their full potential.</p>
+          <p>After college, I spent eight years coaching at Rex Putnam High School, where I had the privilege of guiding young athletes, building championship teams, and creating a culture of dedication, teamwork, and relentless improvement. Today, I am proud to be the head coach at Clackamas High School, returning to my roots to give back to the community that shaped my love for the game.</p>
+          <p>Coaching isn't just a career for me — it's a calling. There's nothing more rewarding than watching athletes develop confidence, passion, and skills that carry them far beyond the softball field.</p>
+        </div>
+
+        <div class="mentors reveal">
+          <div class="mentors-title">Elite Training</div>
+          <div class="mentor-list">
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Mike White</div>
+                <div class="mentor-desc">One of the best college coaches in America, former head coach of the University of Oregon, and current head coach of the University of Texas. A former pitching standout for U.S. National Teams — his mentorship helped develop precision, strategy, and confidence on the mound.</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">John Gay</div>
+                <div class="mentor-desc">Considered one of the best fastpitch softball pitching coaches in the nation. His intensity, focus, and innovative techniques push athletes to dominate in high-pressure situations.</div>
+              </div>
+            </div>
+            <div class="mentor">
+              <div class="mentor-bar"></div>
+              <div>
+                <div class="mentor-name">Amy Harris</div>
+                <div class="mentor-desc">Standout pitcher for the University of Oregon — set the lowest ERA in 10 years (1.30 in 2005), became the Ducks' all-time strikeout leader with 487 strikeouts, and earned second-team All-Pac-10 honors.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="coach-cta reveal">
+          <div class="coach-cta-text">
+            <h4>Train With Samantha</h4>
+            <p>Book a session or explore training options.</p>
+          </div>
+          <div class="coach-cta-btns">
+            <a href="book-an-appointment.html" class="btn btn-primary">Book Training →</a>
+            <a href="index (1).html#programs" class="btn btn-ghost">View Programs</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3 class="display">Frost <em>Elite</em></h3>
+        <p>Elite development, competitive teams, and college prep performance — built in Damascus, Oregon.</p>
+      </div>
+      <div>
+        <h5>Program</h5>
+        <ul>
+          <li><a href="about-our-program.html">About</a></li>
+          <li><a href="coaches.html">Coaches</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="college-commits.html">College Commits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get Started</h5>
+        <ul>
+          <li><a href="book-an-appointment.html">Book Appointment</a></li>
+          <li><a href="index (1).html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/frostelite2.0/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/FrostFastpitch" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="mailto:frostelitesports@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Frost Elite Sports</span>
+      <a href="terms-of-service.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+menuToggle?.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu?.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    menuToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+});
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#020617" />
+<title>About Our Program — Frost Elite Sports</title>
+<meta name="description" content="Frost Elite Sports delivers high-level training, competitive teams, and college prep support for athletes who want real development." />
+
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --ice:       #38BDF8;
+  --ice-2:     #0EA5E9;
+  --ice-soft:  #7DD3FC;
+  --ice-glow:  #E0F2FE;
+  --ink:       #020617;
+  --ink-2:     #07101F;
+  --ink-3:     #0C1626;
+  --black:     #01040a;
+  --bone:      #F4F1EA;
+  --bone-2:    #DDD6C8;
+  --text:      #EEF2F7;
+  --muted:     #9AA8BC;
+  --line:      rgba(56,189,248,0.20);
+  --line-soft: rgba(255,255,255,0.08);
+
+  --display: "Bebas Neue", "Oswald", "Arial Narrow", sans-serif;
+  --athletic: "Oswald", "Bebas Neue", sans-serif;
+  --sans:  "Inter Tight", system-ui, -apple-system, sans-serif;
+  --mono:  "JetBrains Mono", ui-monospace, monospace;
+
+  --maxw: 1320px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --header-h: 78px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--text);
+  line-height: 1.55;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+::selection { background: var(--ice); color: var(--ink); }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  animation: grain 8s steps(8) infinite;
+}
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10% { transform: translate(-3%,-2%); }
+  20% { transform: translate(2%,3%); }
+  30% { transform: translate(-4%,1%); }
+  40% { transform: translate(3%,-3%); }
+  50% { transform: translate(-2%,4%); }
+  60% { transform: translate(4%,-2%); }
+  70% { transform: translate(-3%,3%); }
+  80% { transform: translate(2%,-4%); }
+  90% { transform: translate(-4%,2%); }
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  line-height: .88;
+  color: var(--bone);
+  text-transform: uppercase;
+}
+.display em {
+  font-family: var(--athletic);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ice-soft);
+}
+.kicker {
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ice);
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+}
+.kicker::before {
+  content: "";
+  width: 28px; height: 1px;
+  background: var(--ice);
+  display: inline-block;
+}
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.section {
+  padding: clamp(5rem, 9vw, 8rem) 0;
+}
+.section-alt { background: var(--ink-2); }
+.section-dark { background: var(--black); }
+
+/* ============== HEADER ============== */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(2,6,23,.55) 0%, rgba(2,6,23,0) 100%);
+  border-bottom: 1px solid transparent;
+  transition: background .4s var(--ease), border-color .4s var(--ease), backdrop-filter .4s var(--ease);
+}
+.header.scrolled {
+  background: rgba(2,6,23,.88);
+  border-bottom-color: rgba(56,189,248,.12);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 1px 40px rgba(0,0,0,.4);
+}
+.header-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand { display: flex; align-items: center; transition: opacity .3s var(--ease); }
+.brand:hover { opacity: .85; }
+.brand img { height: 62px; width: auto; display: block; filter: drop-shadow(0 0 12px rgba(56,189,248,.25)); }
+.nav { display: flex; align-items: center; gap: 2.4rem; }
+.nav a {
+  font-family: var(--athletic);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--bone);
+  position: relative;
+  padding: 6px 0;
+  transition: color .3s var(--ease);
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width .35s var(--ease);
+}
+.nav a:hover { color: var(--ice); }
+.nav a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: var(--athletic);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ice) !important;
+  padding: 6px 0;
+  position: relative;
+  transition: color .3s var(--ease);
+}
+.nav-cta::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width .35s var(--ease);
+}
+.nav-cta:hover::after { width: 100%; }
+.menu-toggle {
+  display: none;
+  width: 32px; height: 32px;
+  position: relative;
+}
+.menu-toggle span {
+  position: absolute;
+  left: 4px; right: 4px;
+  height: 1.5px;
+  background: var(--bone);
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+.menu-toggle span:nth-child(1) { top: 11px; }
+.menu-toggle span:nth-child(2) { top: 16px; }
+.menu-toggle span:nth-child(3) { top: 21px; }
+.menu-toggle.open span:nth-child(1) { top: 16px; transform: rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { top: 16px; transform: rotate(-45deg); }
+
+/* ============== PAGE HERO ============== */
+.page-hero {
+  position: relative;
+  padding: calc(var(--header-h) + 6rem) 0 5rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(56,189,248,.11), transparent 60%),
+    var(--ink);
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent 0 40px, rgba(56,189,248,.018) 40px 41px);
+  pointer-events: none;
+}
+.page-hero-inner { position: relative; z-index: 1; }
+.page-hero h1 {
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+.page-hero-lead {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: var(--bone-2);
+  max-width: 58ch;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.hero-btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ============== PILLARS ============== */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
+}
+@media (min-width: 700px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .pillars-grid { grid-template-columns: repeat(4, 1fr); } }
+.pillar {
+  background: var(--ink-2);
+  padding: 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s var(--ease);
+}
+.pillar:hover { background: var(--ink-3); }
+.pillar::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ice), transparent);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.pillar:hover::before { opacity: 1; }
+.pillar-icon {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1rem;
+}
+.pillar p {
+  font-size: .95rem;
+  color: var(--bone-2);
+  line-height: 1.65;
+}
+
+/* ============== PROGRAMS ============== */
+.program-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 900px) { .program-cards { grid-template-columns: repeat(3, 1fr); } }
+.program-card {
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .4s var(--ease), transform .4s var(--ease);
+}
+.program-card:hover { border-color: rgba(56,189,248,.35); transform: translateY(-4px); }
+.program-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(56,189,248,.07), transparent 45%);
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+  pointer-events: none;
+}
+.program-card:hover::before { opacity: 1; }
+.program-card-num {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .2em;
+  color: var(--ice);
+  margin-bottom: 1.25rem;
+}
+.program-card h3 {
+  font-family: var(--athletic);
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bone);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.program-card p {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+.program-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: .63rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  color: var(--bone-2);
+}
+
+/* ============== WHAT WE TRAIN ============== */
+.train-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 900px) {
+  .train-grid { grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 5rem; align-items: start; }
+}
+.train-list { display: flex; flex-direction: column; gap: 0; }
+.train-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: start;
+}
+.train-item:last-child { border-bottom: 0; }
+.train-label {
+  font-family: var(--athletic);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ice);
+  padding-top: .15rem;
+}
+.train-desc {
+  font-size: .95rem;
+  color: var(--bone-2);
+  line-height: 1.65;
+}
+
+/* ============== STANDARDS ============== */
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media (min-width: 900px) { .standards-grid { grid-template-columns: repeat(4, 1fr); } }
+.standard {
+  padding: 2rem 1.75rem;
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  position: relative;
+  overflow: hidden;
+}
+.standard::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--ice), transparent);
+}
+.standard-num {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: 1.25rem;
+}
+.standard h4 {
+  font-family: var(--athletic);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: .75rem;
+  line-height: 1.1;
+}
+.standard p {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ============== PHASES ============== */
+.phases {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  counter-reset: phase;
+}
+.phase {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: start;
+  position: relative;
+}
+.phase:last-child { border-bottom: 0; }
+.phase::before {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -1px;
+  width: 0; height: 1px;
+  background: var(--ice);
+  transition: width 1s var(--ease);
+}
+.phase.in::before { width: 100%; }
+.phase-num {
+  font-family: var(--display);
+  font-size: 3.5rem;
+  color: rgba(56,189,248,.15);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+.phase h4 {
+  font-family: var(--athletic);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: .6rem;
+}
+.phase p {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 55ch;
+}
+
+/* ============== BOOKING STEPS ============== */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 700px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+.step {
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  padding: 2rem 1.75rem;
+  position: relative;
+}
+.step-num {
+  font-family: var(--display);
+  font-size: 4rem;
+  color: rgba(56,189,248,.12);
+  line-height: 1;
+  margin-bottom: .75rem;
+}
+.step h4 {
+  font-family: var(--athletic);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--bone);
+  margin-bottom: .6rem;
+}
+.step p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+
+/* ============== CONTACT STRIP ============== */
+.contact-strip {
+  background: var(--ink-3);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  padding: 2.5rem 0;
+}
+.contact-strip-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.contact-detail .lbl {
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact-detail a, .contact-detail span {
+  font-family: var(--athletic);
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bone);
+  transition: color .3s var(--ease);
+}
+.contact-detail a:hover { color: var(--ice); }
+.contact-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--line-soft);
+  flex-shrink: 0;
+}
+@media (max-width: 700px) { .contact-divider { display: none; } }
+
+/* ============== SECTION HEADER ============== */
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+@media (min-width: 900px) {
+  .section-head { grid-template-columns: minmax(0,1.1fr) minmax(0,1fr); gap: 4rem; align-items: end; }
+}
+.section-title { font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: 0.005em; }
+.section-lead { font-size: clamp(1rem, 1.2vw, 1.1rem); color: var(--bone-2); line-height: 1.7; max-width: 50ch; }
+
+/* ============== BUTTONS ============== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 13px 26px;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+}
+.btn-primary { background: var(--bone); color: var(--ink); }
+.btn-primary:hover { background: var(--ice); transform: translateY(-2px); box-shadow: 0 14px 36px -10px rgba(56,189,248,.55); }
+.btn-ghost { background: transparent; color: var(--bone); border: 1px solid var(--line-soft); }
+.btn-ghost:hover { border-color: var(--ice); color: var(--ice); transform: translateY(-2px); }
+
+/* ============== FOOTER ============== */
+.footer { background: var(--black); padding: 4rem 0 2rem; border-top: 1px solid var(--line-soft); }
+.footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-bottom: 3rem; }
+@media (min-width: 700px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.footer h5 { font-family: var(--mono); font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ice); margin-bottom: 1.25rem; font-weight: 500; }
+.footer ul { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+.footer ul a { font-size: .95rem; color: var(--bone-2); transition: color .25s var(--ease), padding-left .25s var(--ease); }
+.footer ul a:hover { color: var(--ice); padding-left: 6px; }
+.footer-brand .display { font-size: clamp(2.2rem, 3.5vw, 3rem); margin-bottom: .75rem; }
+.footer-brand p { color: var(--muted); max-width: 32ch; font-size: .9rem; line-height: 1.6; }
+.footer-bottom { border-top: 1px solid var(--line-soft); padding-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+.footer-bottom a:hover { color: var(--ice); }
+
+/* ============== REVEAL ============== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============== MOBILE NAV ============== */
+@media (max-width: 820px) {
+  .nav { gap: 1.2rem; flex-wrap: wrap; justify-content: flex-end; }
+  .nav a { font-size: .78rem; }
+  .phase { grid-template-columns: 80px 1fr; }
+  .standards-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  body::before { animation: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="index (1).html" class="brand">
+      <img src="Public/IMG_9206.PNG" alt="Frost Elite" />
+    </a>
+    <nav class="nav">
+      <a href="about-our-program.html" style="color:var(--ice);">About</a>
+      <a href="teams.html">Teams</a>
+      <a href="coaches.html">Coaches</a>
+      <a href="index (1).html#contact">Contact</a>
+      <a href="college-commits.html">Commits</a>
+      <a href="events.html">Events</a>
+      <a href="book-an-appointment.html" class="nav-cta">Book Training</a>
+    </nav>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="kicker">About Our Program</div>
+    <h1 class="display">Elite Development for<br><em>Competitive</em> Softball & Baseball.</h1>
+    <p class="page-hero-lead">Frost Elite Sports delivers high-level training, competitive teams, and college prep support for athletes who want real development. Our program is built around standards, details, accountability, and long-term progress — not quick fixes.</p>
+    <div class="hero-btn-row">
+      <a href="book-an-appointment.html" class="btn btn-primary">Book Training →</a>
+      <a href="teams.html" class="btn btn-ghost">View Teams</a>
+      <a href="college-commits.html" class="btn btn-ghost">College Commits</a>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<div class="pillars-grid">
+  <div class="pillar reveal">
+    <div class="pillar-icon">01 / Skill</div>
+    <p>Skill training built around repeatable mechanics, better decisions, and game transfer.</p>
+  </div>
+  <div class="pillar reveal">
+    <div class="pillar-icon">02 / Team</div>
+    <p>Team structure with standards, accountability, and clear weekly objectives.</p>
+  </div>
+  <div class="pillar reveal">
+    <div class="pillar-icon">03 / Recruiting</div>
+    <p>Recruiting support: guidance, exposure planning, and realistic next-step targets.</p>
+  </div>
+  <div class="pillar reveal">
+    <div class="pillar-icon">04 / Performance</div>
+    <p>Movement quality, durability, and strength & conditioning options — built for long-term athletes.</p>
+  </div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">What We Offer</div>
+        <h2 class="display section-title">Designed for athletes who want a <em>program.</em></h2>
+      </div>
+      <p class="section-lead reveal">Not just random lessons. A structured path with coaching that builds on itself — session to session, month to month.</p>
+    </div>
+
+    <div class="program-cards">
+      <div class="program-card reveal">
+        <div class="program-card-num">01 / Private & Small Group</div>
+        <h3>Position-Specific Training</h3>
+        <p>Position-specific work for hitters, pitchers, catchers, and defenders — with coaching built around clean mechanics, consistent execution, and real improvement that shows up in games.</p>
+        <div class="program-tags">
+          <span class="tag">Hitting</span>
+          <span class="tag">Pitching</span>
+          <span class="tag">Catching</span>
+          <span class="tag">Defense</span>
+          <span class="tag">Recruiting Video</span>
+        </div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-card-num">02 / Club Teams</div>
+        <h3>Frost Elite Softball Teams</h3>
+        <p>High-standard teams with structured practices, competitive opportunities, and a development-first mindset. Athletes are coached with clear expectations and built to compete with confidence.</p>
+        <div class="program-tags">
+          <span class="tag">Travel</span>
+          <span class="tag">Local</span>
+          <span class="tag">Competitive Play</span>
+          <span class="tag">Culture</span>
+        </div>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-card-num">03 / College Prep</div>
+        <h3>College Recruiting Prep</h3>
+        <p>Support for families navigating recruiting — from exposure planning and timelines to realistic targets, communication standards, and development priorities.</p>
+        <div class="program-tags">
+          <span class="tag">Recruiting</span>
+          <span class="tag">Showcases</span>
+          <span class="tag">Guidance</span>
+          <span class="tag">Development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE TRAIN -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="train-grid">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">The Details</div>
+        <h2 class="display section-title">What We Train — and <em>Why It Matters.</em></h2>
+        <p style="color:var(--bone-2); line-height:1.7; margin-top:1.5rem; font-size:.95rem;">Training at Frost Elite is built around details that win innings: efficient movement, repeatable mechanics, and decision-making under pressure. Athletes don't just "get reps" — they learn how to execute.</p>
+      </div>
+      <div class="train-list reveal">
+        <div class="train-item">
+          <div class="train-label">Hitting</div>
+          <div class="train-desc">Swing decisions, timing, bat path, approach, and confidence in the box.</div>
+        </div>
+        <div class="train-item">
+          <div class="train-label">Defense</div>
+          <div class="train-desc">Footwork, first-step quickness, angles, glove work, and clean transfers.</div>
+        </div>
+        <div class="train-item">
+          <div class="train-label">Catching</div>
+          <div class="train-desc">Receiving, blocking, throwdowns, and game-control fundamentals.</div>
+        </div>
+        <div class="train-item">
+          <div class="train-label">Pitching</div>
+          <div class="train-desc">Mechanics, command, movement, sequencing, and composure.</div>
+        </div>
+        <div class="train-item">
+          <div class="train-label">Movement</div>
+          <div class="train-desc">Strength base, stability, and efficient patterns to reduce breakdowns.</div>
+        </div>
+        <div class="train-item">
+          <div class="train-label">Durability</div>
+          <div class="train-desc">Training that supports healthy workload and long-term athletic development.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="section section-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">Why Frost</div>
+        <h2 class="display section-title">Where Details, Standard, and <em>Development</em> Matter.</h2>
+      </div>
+      <p class="section-lead reveal">Frost Elite focuses on what most programs overlook — movement quality, purpose-driven coaching, accountability, and real development paths for athletes who want more than ordinary training.</p>
+    </div>
+
+    <div class="standards-grid">
+      <div class="standard reveal">
+        <div class="standard-num">Standard 01</div>
+        <h4>Experienced Coaching Staff</h4>
+        <p>Guidance from coaches who understand competition, development, and game-ready detail.</p>
+      </div>
+      <div class="standard reveal">
+        <div class="standard-num">Standard 02</div>
+        <h4>Purpose-Driven Sessions</h4>
+        <p>Every session has an objective — built around measurable improvement and confidence.</p>
+      </div>
+      <div class="standard reveal">
+        <div class="standard-num">Standard 03</div>
+        <h4>Dedicated Facility</h4>
+        <p>An environment that supports hitting, pitching, defense, and conditioning year-round.</p>
+      </div>
+      <div class="standard reveal">
+        <div class="standard-num">Standard 04</div>
+        <h4>Culture & Accountability</h4>
+        <p>Effort, consistency, communication, and growth — athletes learn how to train and compete.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">The Path</div>
+        <h2 class="display section-title">How Athletes <em>Progress.</em></h2>
+      </div>
+      <p class="section-lead reveal">The goal is not just better workouts — it's better performance. Athletes progress through consistent training habits, higher standards, and skill execution that translates to game situations.</p>
+    </div>
+
+    <div class="phases">
+      <div class="phase reveal">
+        <div class="phase-num">01</div>
+        <div>
+          <h4>Foundation</h4>
+          <p>Build clean mechanics, consistent movement patterns, and confidence in basic execution.</p>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-num">02</div>
+        <div>
+          <h4>Consistency</h4>
+          <p>Repeat skills under pressure with higher quality reps and clear standards.</p>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-num">03</div>
+        <div>
+          <h4>Game Transfer</h4>
+          <p>Train decision-making and execution that shows up in games and competitive environments.</p>
+        </div>
+      </div>
+      <div class="phase reveal">
+        <div class="phase-num">04</div>
+        <div>
+          <h4>Next-Level Prep</h4>
+          <p>College prep support, exposure planning, and development priorities for the next stage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING STEPS -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">Getting Started</div>
+        <h2 class="display section-title">How Booking <em>Works.</em></h2>
+      </div>
+      <p class="section-lead reveal">Booking is built for families. Choose your service, select a coach and time, confirm, and show up ready to train. If you're unsure what to book, start with a private session.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <h4>Choose Your Service</h4>
+        <p>Hitting, pitching, defense, catching, and recruiting video sessions.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <h4>Pick Coach & Time</h4>
+        <p>Find availability that works for your schedule and lock in your slot.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <h4>Confirm Booking</h4>
+        <p>Complete checkout and get confirmation details with everything you need.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <h4>Train With Intention</h4>
+        <p>Arrive ready to work — we handle the plan, detail, and progression.</p>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; margin-top:3rem;" class="reveal">
+      <a href="book-an-appointment.html" class="btn btn-primary">Go to Online Booking →</a>
+    </div>
+  </div>
+</section>
+
+<!-- COACHES CTA -->
+<section class="section section-dark">
+  <div class="wrap" style="text-align:center;">
+    <div class="reveal">
+      <div class="kicker" style="justify-content:center; margin-bottom:1.5rem;">The Staff</div>
+      <h2 class="display" style="font-size:clamp(2.5rem,6vw,5rem); margin-bottom:1.5rem;">Meet Our <em>Coaches.</em></h2>
+      <p style="color:var(--bone-2); max-width:46ch; margin:0 auto 2rem; line-height:1.7;">Landon and Samantha Frost lead every aspect of the program — from daily training to recruiting.</p>
+      <a href="coaches.html" class="btn btn-primary">Meet the Coaches →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip">
+  <div class="wrap">
+    <div class="contact-strip-inner">
+      <div class="contact-detail">
+        <span class="lbl">Facility</span>
+        <span>14041 SE Scooter Ln, Damascus, OR 97089</span>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-detail">
+        <span class="lbl">Phone</span>
+        <a href="tel:+15415214224">(541) 521-4224</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="contact-detail">
+        <span class="lbl">Email</span>
+        <a href="mailto:frostelitesports@gmail.com">Frostelitesports@gmail.com</a>
+      </div>
+      <div class="contact-divider"></div>
+      <div style="display:flex; gap:.75rem;">
+        <a href="index (1).html#contact" class="btn btn-ghost" style="padding:10px 20px;">Contact</a>
+        <a href="https://www.facebook.com/FrostFastpitch" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:10px 20px;">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3 class="display">Frost <em>Elite</em></h3>
+        <p>Elite development, competitive teams, and college prep performance — built in Damascus, Oregon.</p>
+      </div>
+      <div>
+        <h5>Program</h5>
+        <ul>
+          <li><a href="about-our-program.html">About</a></li>
+          <li><a href="coaches.html">Coaches</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="college-commits.html">College Commits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get Started</h5>
+        <ul>
+          <li><a href="book-an-appointment.html">Book Appointment</a></li>
+          <li><a href="index (1).html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/frostelite2.0/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/FrostFastpitch" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="mailto:frostelitesports@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Frost Elite Sports</span>
+      <a href="terms-of-service.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const header = document.getElementById('header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+const menuToggle = document.getElementById('menuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+menuToggle?.addEventListener('click', () => {
+  menuToggle.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu?.addEventListener('click', e => {
+  if (e.target.tagName === 'A') {
+    menuToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+});
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal, .phase').forEach(el => revealObs.observe(el));
+
+document.querySelectorAll('.program-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    card.style.setProperty('--my', `${e.clientY - r.top}px`);
+  });
+});
+</script>
+
+</body>
+</html>
