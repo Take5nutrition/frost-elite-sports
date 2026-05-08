@@ -1322,23 +1322,93 @@ body::before {
   margin-top: .35rem;
 }
 
-.fb-embed-col { position: relative; }
+/* Phone mockup container */
+.fb-embed-col {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 
-.fb-embed-shell {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--line-soft);
-  background: #fff;
-  box-shadow: 0 32px 80px -20px rgba(0,0,0,.55);
+.fb-phone {
   position: relative;
-  min-height: 420px;
-  transition: box-shadow .4s var(--ease);
+  width: 340px;
+  flex-shrink: 0;
+  background: linear-gradient(155deg, #26263a 0%, #17172a 100%);
+  border-radius: 52px;
+  padding: 58px 14px 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.13),
+    inset 0 -1px 0 rgba(255,255,255,.06),
+    0 60px 120px -30px rgba(0,0,0,.9),
+    0 20px 60px -15px rgba(0,0,0,.65),
+    0 0 60px -10px rgba(56,189,248,.08);
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
 }
-.fb-embed-shell:hover {
-  box-shadow: 0 40px 100px -20px rgba(56,189,248,.12), 0 32px 80px -20px rgba(0,0,0,.6);
+.fb-phone:hover {
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(255,255,255,.08),
+    0 80px 150px -30px rgba(0,0,0,.9),
+    0 30px 80px -15px rgba(0,0,0,.7),
+    0 0 80px -10px rgba(56,189,248,.14);
 }
-.fb-embed-shell .fb-page { display: block; }
 
+/* Volume buttons — left side */
+.fb-phone::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 108px;
+  width: 4px;
+  height: 28px;
+  background: #1c1c2c;
+  border-radius: 2px 0 0 2px;
+  box-shadow: 0 46px 0 #1c1c2c, 0 92px 0 #1c1c2c;
+}
+
+/* Power button — right side */
+.fb-phone::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 138px;
+  width: 4px;
+  height: 56px;
+  background: #1c1c2c;
+  border-radius: 0 2px 2px 0;
+}
+
+.fb-phone-island {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 32px;
+  background: #0a0a14;
+  border-radius: 999px;
+  z-index: 10;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.8);
+}
+
+.fb-phone-screen {
+  background: #fff;
+  border-radius: 38px;
+  overflow: hidden;
+  height: 596px;
+  position: relative;
+}
+
+.fb-phone-home {
+  width: 120px;
+  height: 5px;
+  background: rgba(255,255,255,.28);
+  border-radius: 999px;
+  margin: 10px auto 0;
+}
+
+/* Loading state inside phone screen */
 .fb-embed-loading {
   position: absolute;
   inset: 0;
@@ -1347,44 +1417,35 @@ body::before {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: #f4f6f9;
+  background: #f0f2f5;
   pointer-events: none;
   transition: opacity .4s ease;
+  border-radius: 38px;
+  z-index: 2;
 }
 .fb-embed-loading.hidden { opacity: 0; pointer-events: none; }
-.fb-embed-loading svg { opacity: .35; }
+.fb-embed-loading svg { opacity: .4; }
 .fb-embed-loading p {
   font-family: var(--mono);
   font-size: .7rem;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: #888;
+  color: #999;
 }
 
-.fb-fallback {
-  padding: 2.5rem;
-  text-align: center;
-  background: #f4f6f9;
-}
-.fb-fallback p {
-  font-family: var(--sans);
-  color: #555;
-  margin-bottom: 1.5rem;
-}
-.fb-fallback .btn-ghost {
-  color: var(--ink);
-  border-color: rgba(0,0,0,.2);
-}
-.fb-fallback .btn-ghost:hover { color: #1877F2; border-color: #1877F2; }
+.fb-phone-screen .fb-page { display: block; }
 
 @media (max-width: 900px) {
-  .fb-grid {
-    grid-template-columns: 1fr;
-  }
-  .fb-embed-shell { min-height: 500px; }
+  .fb-grid { grid-template-columns: 1fr; }
+  .fb-phone { width: 300px; border-radius: 46px; padding: 52px 12px 12px; }
+  .fb-phone-screen { height: 520px; border-radius: 34px; }
+  .fb-embed-loading { border-radius: 34px; }
 }
 @media (max-width: 480px) {
   .fb-stats { gap: 2rem; }
+  .fb-phone { width: 272px; border-radius: 42px; padding: 48px 11px 11px; }
+  .fb-phone-screen { height: 480px; border-radius: 30px; }
+  .fb-embed-loading { border-radius: 30px; }
 }
 </style>
 </head>
@@ -1767,28 +1828,35 @@ body::before {
 
       <!-- Embed -->
       <div class="fb-embed-col reveal">
-        <div class="fb-embed-shell" id="fbEmbedShell">
-          <!-- Loading placeholder -->
-          <div class="fb-embed-loading" id="fbLoading">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
-              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
-            </svg>
-            <p>Loading feed…</p>
+        <div class="fb-phone">
+          <!-- Dynamic Island -->
+          <div class="fb-phone-island"></div>
+          <!-- Screen -->
+          <div class="fb-phone-screen" id="fbEmbedShell">
+            <!-- Loading placeholder -->
+            <div class="fb-embed-loading" id="fbLoading">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
+                <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+              </svg>
+              <p>Loading feed…</p>
+            </div>
+            <!-- FB Page Plugin — width fills the 312px screen, height matches screen -->
+            <div class="fb-page"
+                 data-href="https://www.facebook.com/frostelite2.0"
+                 data-tabs="timeline"
+                 data-width=""
+                 data-height="596"
+                 data-small-header="true"
+                 data-adapt-container-width="true"
+                 data-hide-cover="false"
+                 data-show-facepile="false">
+              <blockquote cite="https://www.facebook.com/frostelite2.0" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/frostelite2.0">Frost Elite 2.0</a>
+              </blockquote>
+            </div>
           </div>
-          <!-- FB Page Plugin -->
-          <div class="fb-page"
-               data-href="https://www.facebook.com/frostelite2.0"
-               data-tabs="timeline"
-               data-width=""
-               data-height="600"
-               data-small-header="true"
-               data-adapt-container-width="true"
-               data-hide-cover="false"
-               data-show-facepile="true">
-            <blockquote cite="https://www.facebook.com/frostelite2.0" class="fb-xfbml-parse-ignore">
-              <a href="https://www.facebook.com/frostelite2.0">Frost Elite 2.0</a>
-            </blockquote>
-          </div>
+          <!-- Home indicator -->
+          <div class="fb-phone-home"></div>
         </div>
       </div>
 
