@@ -559,7 +559,6 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-// Form submission via Formspree
 const form = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 const successMsg = document.getElementById('formSuccess');
@@ -572,11 +571,13 @@ form.addEventListener('submit', async (e) => {
   successMsg.style.display = 'none';
   errorMsg.style.display = 'none';
 
+  const data = Object.fromEntries(new FormData(form));
+
   try {
-    const res = await fetch(form.action, {
+    const res = await fetch('/api/contact', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
     });
     if (res.ok) {
       form.reset();
@@ -584,9 +585,12 @@ form.addEventListener('submit', async (e) => {
       submitBtn.textContent = 'Send Message →';
       submitBtn.disabled = false;
     } else {
+      const err = await res.json().catch(() => ({}));
+      console.error('API error:', err);
       throw new Error('Server error');
     }
-  } catch {
+  } catch (err) {
+    console.error(err);
     errorMsg.style.display = 'block';
     submitBtn.textContent = 'Send Message →';
     submitBtn.disabled = false;

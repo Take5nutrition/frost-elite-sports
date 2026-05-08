@@ -7,7 +7,11 @@ module.exports = async (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { name, email, phone, subject, message } = req.body;
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  const { name, email, phone, subject, message } = body || {};
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Missing required fields' });
