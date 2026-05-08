@@ -1273,6 +1273,119 @@ body::before {
   .home-event-title { font-size: 1.15rem; }
   .home-event-cta { display: none; }
 }
+
+/* ============== FACEBOOK SECTION ============== */
+.fb-section { overflow: hidden; }
+
+.fb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.fb-copy { display: flex; flex-direction: column; }
+
+.btn-fb {
+  background: #1877F2;
+  color: #fff;
+}
+.btn-fb:hover {
+  background: #145db8;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -10px rgba(24,119,242,.5);
+}
+.btn-fb svg { flex-shrink: 0; }
+
+.fb-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line-soft);
+}
+.fb-stat-num {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--ice);
+  letter-spacing: .04em;
+  line-height: 1;
+}
+.fb-stat-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: .35rem;
+}
+
+.fb-embed-col { position: relative; }
+
+.fb-embed-shell {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  background: #fff;
+  box-shadow: 0 32px 80px -20px rgba(0,0,0,.55);
+  position: relative;
+  min-height: 420px;
+  transition: box-shadow .4s var(--ease);
+}
+.fb-embed-shell:hover {
+  box-shadow: 0 40px 100px -20px rgba(56,189,248,.12), 0 32px 80px -20px rgba(0,0,0,.6);
+}
+.fb-embed-shell .fb-page { display: block; }
+
+.fb-embed-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #f4f6f9;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+.fb-embed-loading.hidden { opacity: 0; pointer-events: none; }
+.fb-embed-loading svg { opacity: .35; }
+.fb-embed-loading p {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.fb-fallback {
+  padding: 2.5rem;
+  text-align: center;
+  background: #f4f6f9;
+}
+.fb-fallback p {
+  font-family: var(--sans);
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+.fb-fallback .btn-ghost {
+  color: var(--ink);
+  border-color: rgba(0,0,0,.2);
+}
+.fb-fallback .btn-ghost:hover { color: #1877F2; border-color: #1877F2; }
+
+@media (max-width: 900px) {
+  .fb-grid {
+    grid-template-columns: 1fr;
+  }
+  .fb-embed-shell { min-height: 500px; }
+}
+@media (max-width: 480px) {
+  .fb-stats { gap: 2rem; }
+}
 </style>
 </head>
 
@@ -1615,6 +1728,74 @@ body::before {
   </div>
 </section>
 
+<!-- ============== FACEBOOK ============== -->
+<section class="section fb-section" id="social" style="background:var(--ink-2); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
+  <div id="fb-root"></div>
+  <div class="wrap">
+    <div class="fb-grid">
+
+      <!-- Copy -->
+      <div class="fb-copy reveal">
+        <div class="kicker" style="margin-bottom:1.5rem;">Stay Connected</div>
+        <h2 class="display section-title">Latest from <em>Frost Elite.</em></h2>
+        <p class="lead" style="margin-top:1.5rem; max-width:40ch;">
+          Follow along for camp announcements, team updates, tournament results, and training highlights — straight from the source.
+        </p>
+        <div style="margin-top:2.5rem;">
+          <a href="https://www.facebook.com/frostelite2.0" target="_blank" rel="noopener" class="btn btn-fb">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+            Follow on Facebook
+          </a>
+        </div>
+        <div class="fb-stats">
+          <div class="fb-stat">
+            <span class="fb-stat-num">9+</span>
+            <span class="fb-stat-label">Years of Community</span>
+          </div>
+          <div class="fb-stat">
+            <span class="fb-stat-num">500+</span>
+            <span class="fb-stat-label">Athletes Developed</span>
+          </div>
+          <div class="fb-stat">
+            <span class="fb-stat-num">60+</span>
+            <span class="fb-stat-label">College Commits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Embed -->
+      <div class="fb-embed-col reveal">
+        <div class="fb-embed-shell" id="fbEmbedShell">
+          <!-- Loading placeholder -->
+          <div class="fb-embed-loading" id="fbLoading">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
+              <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.791-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+            </svg>
+            <p>Loading feed…</p>
+          </div>
+          <!-- FB Page Plugin -->
+          <div class="fb-page"
+               data-href="https://www.facebook.com/frostelite2.0"
+               data-tabs="timeline"
+               data-width=""
+               data-height="600"
+               data-small-header="true"
+               data-adapt-container-width="true"
+               data-hide-cover="false"
+               data-show-facepile="true">
+            <blockquote cite="https://www.facebook.com/frostelite2.0" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/frostelite2.0">Frost Elite 2.0</a>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ============== CTA ============== -->
 <section class="section cta">
   <div class="wrap">
@@ -1864,6 +2045,63 @@ document.querySelectorAll('.program').forEach(card => {
     grid.appendChild(card);
     revealObs.observe(card);
   });
+})();
+</script>
+
+<script>
+// Lazy-load Facebook Page Plugin SDK when section scrolls into view
+(function () {
+  const section = document.getElementById('social');
+  const loading = document.getElementById('fbLoading');
+  if (!section) return;
+
+  function loadFBSDK() {
+    if (document.getElementById('facebook-jssdk')) return;
+    const script = document.createElement('script');
+    script.id = 'facebook-jssdk';
+    script.async = true;
+    script.defer = true;
+    script.crossOrigin = 'anonymous';
+    script.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0';
+    document.head.appendChild(script);
+
+    // Hide loading indicator once iframe appears, or show fallback after 8s
+    const fallbackTimer = setTimeout(function () {
+      const iframe = section.querySelector('iframe');
+      if (!iframe && loading) {
+        loading.innerHTML = '<p style="font-family:var(--sans);color:#555;padding:2rem 1.5rem;text-align:center;">Unable to load feed. <a href="https://www.facebook.com/frostelite2.0" target="_blank" rel="noopener" style="color:#1877F2;">View on Facebook →</a></p>';
+      } else if (loading) {
+        loading.classList.add('hidden');
+      }
+    }, 8000);
+
+    script.onload = function () {
+      // Poll until the iframe renders (max 5s)
+      let tries = 0;
+      const poll = setInterval(function () {
+        tries++;
+        const iframe = section.querySelector('iframe');
+        if (iframe || tries > 25) {
+          clearInterval(poll);
+          clearTimeout(fallbackTimer);
+          if (loading) loading.classList.add('hidden');
+        }
+      }, 200);
+    };
+  }
+
+  // Use IntersectionObserver so SDK only loads when section is near viewport
+  if ('IntersectionObserver' in window) {
+    const fbObs = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        fbObs.disconnect();
+        loadFBSDK();
+      }
+    }, { rootMargin: '300px' });
+    fbObs.observe(section);
+  } else {
+    loadFBSDK();
+  }
 })();
 </script>
 
