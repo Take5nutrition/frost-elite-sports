@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
   try {
     await resend.emails.send({
-      from: 'Frost Elite Sports <onboarding@resend.dev>',
+      from: 'Frost Elite Sports <noreply@take5athletics.com>',
       to: 'frostelitesports@gmail.com',
       replyTo: email,
       subject: `[${subject || 'Contact'}] ${name}`,
