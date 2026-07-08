@@ -180,6 +180,44 @@ body::before {
   font-size: 2.6rem;
   padding: .3rem 0;
 }
+
+/* Per-age-group tryout schedule */
+.event-schedule {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-soft);
+  margin-bottom: 1.5rem;
+}
+.tryout-slot {
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  border-radius: 2px;
+  padding: 1.25rem 1.25rem 1.4rem;
+  transition: border-color .3s var(--ease);
+}
+.tryout-slot:hover { border-color: rgba(56,189,248,.3); }
+.tryout-slot .division {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--ice-soft);
+  margin-bottom: 1rem;
+}
+.tryout-slot h5 {
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin: .9rem 0 .35rem;
+  font-weight: 500;
+}
+.tryout-slot h5:first-of-type { margin-top: 0; }
+.tryout-slot ul { list-style: none; display: flex; flex-direction: column; gap: .2rem; }
+.tryout-slot ul li { font-size: .84rem; color: var(--bone-2); line-height: 1.45; }
+.tryout-slot .coaches li { color: var(--muted); font-size: .8rem; }
 @media (max-width: 900px) {
   .event-date-block {
     flex-direction: row;
@@ -603,6 +641,17 @@ if (upcoming.length === 0) {
             </div>` : ''}
           </div>
           <p class="event-description">${ev.description}</p>
+          ${ev.schedule ? `<div class="event-schedule">${ev.schedule.map(s => `
+            <div class="tryout-slot">
+              <div class="division">${s.division}</div>
+              <h5>Tryout Dates</h5>
+              <ul>${s.dates.map(x => `<li>${x}</li>`).join('')}</ul>
+              <h5>Times</h5>
+              <ul>${s.times.map(x => `<li>${x}</li>`).join('')}</ul>
+              <h5>Coaches</h5>
+              <ul class="coaches">${s.coaches.map(x => `<li>${x}</li>`).join('')}</ul>
+            </div>`).join('')}
+          </div>` : ''}
           ${groups.length ? `<div class="event-details-grid">${groups.join('')}
           </div>` : ''}
         </div>
