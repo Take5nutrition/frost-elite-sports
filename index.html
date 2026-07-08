@@ -1124,6 +1124,7 @@ body::before {
   font-family: var(--display); font-size: 4rem; line-height: 1;
   color: var(--bone); font-weight: 700; margin: .1rem 0;
 }
+.home-event-date .dy.dy-season { font-size: 2.4rem; padding: .35rem 0; }
 .home-event-date .dow {
   font-family: var(--mono); font-size: .5rem; letter-spacing: .2em;
   text-transform: uppercase; color: var(--muted);
@@ -2195,23 +2196,34 @@ document.querySelectorAll('.program').forEach(card => {
   const today = new Date(); today.setHours(0,0,0,0);
   const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   const upcoming = FROST_EVENTS
-    .filter(e => new Date(e.dateISO + 'T00:00:00') >= today)
-    .sort((a, b) => new Date(a.dateISO) - new Date(b.dateISO));
+    .filter(e => e.noDate
+      ? (!e.expiresISO || new Date(e.expiresISO + 'T00:00:00') >= today)
+      : new Date(e.dateISO + 'T00:00:00') >= today)
+    .sort((a, b) => {
+      if (!!a.noDate !== !!b.noDate) return a.noDate ? -1 : 1;
+      return new Date(a.dateISO) - new Date(b.dateISO);
+    });
 
-  // Notification banner: show if an event is within 14 days
+  // Notification banner: show if an event is within 14 days (noDate events always show)
   const banner = document.getElementById('eventBanner');
   const bannerText = document.getElementById('bannerText');
   const bannerLink = document.getElementById('bannerLink');
   if (banner && upcoming.length > 0 && !sessionStorage.getItem('bannerDismissed')) {
     const next = upcoming[0];
-    const d = new Date(next.dateISO + 'T00:00:00');
-    const daysAway = Math.round((d - today) / 86400000);
-    if (daysAway <= 30) {
-      const dateStr = d.toLocaleString('en-US', { month: 'long', day: 'numeric' });
-      const daysLabel = daysAway === 0 ? 'Today' : daysAway === 1 ? 'Tomorrow' : `In ${daysAway} days`;
-      bannerText.innerHTML = `<strong>${next.title}</strong> — ${dateStr} &nbsp;·&nbsp; ${daysLabel}`;
+    if (next.noDate) {
+      bannerText.innerHTML = `<strong>${next.title}</strong> — ${next.seasonLabel || 'Coming Up'} &nbsp;·&nbsp; Registration Open`;
       bannerLink.href = next.registerUrl || `events.html#${next.id}`;
       banner.style.display = 'block';
+    } else {
+      const d = new Date(next.dateISO + 'T00:00:00');
+      const daysAway = Math.round((d - today) / 86400000);
+      if (daysAway <= 30) {
+        const dateStr = d.toLocaleString('en-US', { month: 'long', day: 'numeric' });
+        const daysLabel = daysAway === 0 ? 'Today' : daysAway === 1 ? 'Tomorrow' : `In ${daysAway} days`;
+        bannerText.innerHTML = `<strong>${next.title}</strong> — ${dateStr} &nbsp;·&nbsp; ${daysLabel}`;
+        bannerLink.href = next.registerUrl || `events.html#${next.id}`;
+        banner.style.display = 'block';
+      }
     }
   }
 
@@ -2229,10 +2241,22 @@ document.querySelectorAll('.program').forEach(card => {
   const ageSVG   = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 14c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>`;
 
   show.forEach(ev => {
-    const d = new Date(ev.dateISO + 'T00:00:00');
-    const mo  = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
-    const dy  = d.getDate();
-    const dow = DAYS[d.getDay()].toUpperCase();
+    let dateHTML;
+    if (ev.noDate) {
+      dateHTML = `
+        <div class="mo">Season</div>
+        <div class="dy dy-season">26·27</div>
+        <div class="dow">Registration Open</div>`;
+    } else {
+      const d = new Date(ev.dateISO + 'T00:00:00');
+      const mo  = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+      const dy  = d.getDate();
+      const dow = DAYS[d.getDay()].toUpperCase();
+      dateHTML = `
+        <div class="mo">${mo}</div>
+        <div class="dy">${dy}</div>
+        <div class="dow">${dow}</div>`;
+    }
     const card = document.createElement('div');
     card.className = 'home-event-card reveal';
     card.innerHTML = `
@@ -2241,7 +2265,7 @@ document.querySelectorAll('.program').forEach(card => {
         <div class="home-event-title">${ev.title}</div>
         <div class="home-event-meta">
           <span>${clockSVG}${ev.time}</span>
-          <span>${pinSVG}${ev.location}</span>
+          ${ev.location ? `<span>${pinSVG}${ev.location}</span>` : ''}
           ${ev.ages ? `<span>${ageSVG}${ev.ages}</span>` : ''}
         </div>
         <div class="home-event-actions">
@@ -2249,12 +2273,9 @@ document.querySelectorAll('.program').forEach(card => {
           <a href="events.html#${ev.id}" class="btn btn-ghost">Details</a>
         </div>
       </div>
-      <div class="home-event-date">
-        <div class="mo">${mo}</div>
-        <div class="dy">${dy}</div>
-        <div class="dow">${dow}</div>
-        <div class="cost">${ev.cost || 'Free'}</div>
-        <div class="cost-label">per athlete</div>
+      <div class="home-event-date">${dateHTML}
+        ${ev.cost ? `<div class="cost">${ev.cost}</div>
+        <div class="cost-label">per athlete</div>` : ''}
       </div>`;
     grid.appendChild(card);
     revealObs.observe(card);

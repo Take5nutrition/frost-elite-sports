@@ -3,6 +3,22 @@
 
 const FROST_EVENTS = [
   {
+    id: "tryouts-2026-2027",
+    title: "Frost Elite Tryouts",
+    tag: "Tryouts",
+    // No single date — this event stays listed until expiresISO passes.
+    noDate: true,
+    seasonLabel: "2026–2027 Season",
+    expiresISO: "2026-10-31",
+    time: "Dates & times by age group",
+    ages: "10U · 12U · 14U · 16U · 18U",
+    description: "At Frost Elite, we are committed to developing confident athletes in a competitive, family-oriented environment. Our focus is on player development, teamwork, leadership, and building young women who are prepared for success both on and off the field.",
+    noteTitle: "Can't Make Your Tryout?",
+    note: "If you are unable to attend your scheduled tryout, please contact Landon Frost at (541) 521-4224 to arrange a private evaluation.",
+    notePhone: "541-521-4224",
+    registerUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdqS_jzpiTIFVhznCpGTyCFYKHwBOZmcB2vydjpRYz5iKgIJg/viewform",
+  },
+  {
     id: "memorial-day-camp-2026",
     title: "Memorial Day Softball Camp",
     tag: "Camp",

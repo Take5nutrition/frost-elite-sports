@@ -176,6 +176,10 @@ body::before {
   text-transform: uppercase;
   color: var(--muted);
 }
+.event-date-block .day.day-season {
+  font-size: 2.6rem;
+  padding: .3rem 0;
+}
 @media (max-width: 900px) {
   .event-date-block {
     flex-direction: row;
@@ -517,29 +521,69 @@ const container = document.getElementById('eventsContainer');
 const today = new Date(); today.setHours(0,0,0,0);
 
 const upcoming = FROST_EVENTS
-  .filter(e => new Date(e.dateISO + 'T00:00:00') >= today)
-  .sort((a, b) => new Date(a.dateISO) - new Date(b.dateISO));
+  .filter(e => e.noDate
+    ? (!e.expiresISO || new Date(e.expiresISO + 'T00:00:00') >= today)
+    : new Date(e.dateISO + 'T00:00:00') >= today)
+  .sort((a, b) => {
+    if (!!a.noDate !== !!b.noDate) return a.noDate ? -1 : 1;
+    return new Date(a.dateISO) - new Date(b.dateISO);
+  });
 
 if (upcoming.length === 0) {
   container.innerHTML = '<div class="no-events">No upcoming events — check back soon.</div>';
 } else {
   upcoming.forEach(ev => {
-    const d = new Date(ev.dateISO + 'T00:00:00');
-    const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
-    const day   = d.getDate();
-    const dow   = d.toLocaleString('en-US', { weekday: 'long' }).toUpperCase();
+    let dateBlockHTML;
+    if (ev.noDate) {
+      dateBlockHTML = `
+          <div class="month">Season</div>
+          <div class="day day-season">26·27</div>
+          <div class="dow">Registration Open</div>`;
+    } else {
+      const d = new Date(ev.dateISO + 'T00:00:00');
+      const month = d.toLocaleString('en-US', { month: 'short' }).toUpperCase();
+      const day   = d.getDate();
+      const dow   = d.toLocaleString('en-US', { weekday: 'long' }).toUpperCase();
+      dateBlockHTML = `
+          <div class="month">${month}</div>
+          <div class="day">${day}</div>
+          <div class="dow">${dow}</div>`;
+    }
 
-    const bringHTML = ev.bring.map(i => `<li>${i}</li>`).join('');
-    const payHTML   = ev.payment.map(i => `<li>${i}</li>`).join('');
+    const groups = [];
+    if (ev.bring) groups.push(`
+            <div class="event-detail-group">
+              <h4>What to Bring</h4>
+              <ul>${ev.bring.map(i => `<li>${i}</li>`).join('')}</ul>
+            </div>`);
+    if (ev.location) groups.push(`
+            <div class="event-detail-group">
+              <h4>Location</h4>
+              <p>${ev.location}${ev.address ? `<br>${ev.address}` : ''}</p>
+            </div>`);
+    if (ev.payment) groups.push(`
+            <div class="event-detail-group">
+              <h4>Payment</h4>
+              <ul>${ev.payment.map(i => `<li>${i}</li>`).join('')}</ul>
+              ${ev.paymentNote ? `<p class="event-payment-note">${ev.paymentNote}</p>` : ''}
+            </div>`);
+    if (ev.note) {
+      const noteHTML = ev.notePhone
+        ? ev.note.replace(/\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/, m => `<a href="tel:+1${ev.notePhone.replace(/\D/g,'')}" style="color:var(--ice);">${m}</a>`)
+        : ev.note;
+      groups.push(`
+            <div class="event-detail-group">
+              <h4>${ev.noteTitle || 'Please Note'}</h4>
+              <p>${noteHTML}</p>
+            </div>`);
+    }
 
     const card = document.createElement('div');
     card.className = 'event-card reveal';
+    card.id = ev.id;
     card.innerHTML = `
       <div class="event-card-inner">
-        <div class="event-date-block">
-          <div class="month">${month}</div>
-          <div class="day">${day}</div>
-          <div class="dow">${dow}</div>
+        <div class="event-date-block">${dateBlockHTML}
         </div>
         <div class="event-body">
           <div class="event-tag">${ev.tag}</div>
@@ -553,33 +597,20 @@ if (upcoming.length === 0) {
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               ${ev.ages}
             </div>
-            <div class="event-meta-item">
+            ${ev.location ? `<div class="event-meta-item">
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
               ${ev.location}
-            </div>
+            </div>` : ''}
           </div>
           <p class="event-description">${ev.description}</p>
-          <div class="event-details-grid">
-            <div class="event-detail-group">
-              <h4>What to Bring</h4>
-              <ul>${bringHTML}</ul>
-            </div>
-            <div class="event-detail-group">
-              <h4>Location</h4>
-              <p>${ev.location}<br>${ev.address}</p>
-            </div>
-            <div class="event-detail-group">
-              <h4>Payment</h4>
-              <ul>${payHTML}</ul>
-              <p class="event-payment-note">${ev.paymentNote}</p>
-            </div>
-          </div>
+          ${groups.length ? `<div class="event-details-grid">${groups.join('')}
+          </div>` : ''}
         </div>
         <div class="event-cta-block">
-          <div>
+          ${ev.cost ? `<div>
             <div class="event-cost">${ev.cost}</div>
             <div class="event-cost-label">Per Athlete</div>
-          </div>
+          </div>` : ''}
           <a href="${ev.registerUrl}" target="_blank" rel="noopener" class="btn btn-primary">Register →</a>
         </div>
       </div>`;
