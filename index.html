@@ -1332,8 +1332,11 @@ body::before {
   perspective: 1400px;
 }
 
-/* ===== FRAME ===== */
+/* ===== FRAME =====
+   Real iPhone front view: thin titanium rail (5px) around a uniform
+   black bezel (screen border), island + status bar INSIDE the screen. */
 .fb-phone {
+  --sbh: 56px; /* status bar height, drives embed offset + mask position */
   position: relative;
   width: 340px;
   flex-shrink: 0;
@@ -1348,9 +1351,9 @@ body::before {
       #121217 68%,
       #1a1a22 82%,
       #232330 100%);
-  border-radius: 54px;
-  /* top bezel holds the island; bottom = 0, chin div handles it */
-  padding: 56px 12px 0;
+  border-radius: 56px;
+  /* uniform rail all the way around, like the real thing */
+  padding: 5px;
   box-shadow:
     /* titanium edge: bright top-left chamfer */
     inset  1px  1px 0   rgba(255,255,255,.22),
@@ -1414,23 +1417,20 @@ body::before {
     4px 2px 10px rgba(0,0,0,.45);
 }
 
-/* ===== DYNAMIC ISLAND (on frame above screen) ===== */
+/* ===== DYNAMIC ISLAND (floats inside the screen, like the real thing) ===== */
 .fb-phone-island {
   position: absolute;
   top: 11px; left: 50%;
   transform: translateX(-50%);
-  width: 118px; height: 36px;
-  background: #030308;
+  width: 112px; height: 34px;
+  background: #000;
   border-radius: 999px;
   z-index: 20;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 14px;
-  box-shadow:
-    inset 0 1px 5px rgba(0,0,0,.95),
-    0 0 0 1px rgba(0,0,0,.7),
-    0 2px 4px rgba(0,0,0,.5);
+  padding-right: 13px;
+  box-shadow: 0 0 3px rgba(0,0,0,.35);
 }
 .fb-phone-camera {
   width: 13px; height: 13px;
@@ -1448,18 +1448,46 @@ body::before {
   top: 2px; left: 2px;
 }
 
-/* ===== SCREEN ===== */
+/* ===== iOS STATUS BAR (time left, signal/wifi/battery right) ===== */
+.fb-phone-statusbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--sbh);
+  background: #fff;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px 0 34px;
+  pointer-events: none;
+}
+.fb-sb-time {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.2px;
+  color: #000;
+  font-variant-numeric: tabular-nums;
+}
+.fb-sb-icons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.fb-sb-icons svg { display: block; }
+
+/* ===== SCREEN =====
+   The 10px black border IS the bezel — uniform all the way around,
+   19.5:9 content area like a real iPhone. */
 .fb-phone-screen {
   background: #fff;
-  border-radius: 42px;
+  border: 10px solid #000;
+  border-radius: 51px;
   overflow: hidden;
-  height: 610px;
+  height: 690px;
   position: relative;
-  /* screen glass recessed in frame channel */
-  box-shadow:
-    inset 0 0 0 1px rgba(0,0,0,.3),
-    inset 0 2px 8px rgba(0,0,0,.14),
-    inset 0 0 0 .5px rgba(255,255,255,.04);
+  /* faint glass edge where screen meets bezel */
+  box-shadow: inset 0 0 0 .5px rgba(255,255,255,.06);
 }
 
 /* Home indicator lives inside the screen (matches real iPhone) */
@@ -1467,8 +1495,8 @@ body::before {
   position: absolute;
   bottom: 8px; left: 50%;
   transform: translateX(-50%);
-  width: 132px; height: 5px;
-  background: rgba(0,0,0,.14);
+  width: 110px; height: 5px;
+  background: rgba(0,0,0,.2);
   border-radius: 999px;
   z-index: 18;
   pointer-events: none;
@@ -1478,7 +1506,7 @@ body::before {
 .fb-phone-glass {
   position: absolute;
   inset: 0;
-  border-radius: 42px;
+  border-radius: 40px;
   background: linear-gradient(
     138deg,
     rgba(255,255,255,.1)  0%,
@@ -1489,33 +1517,6 @@ body::before {
   );
   pointer-events: none;
   z-index: 16;
-}
-
-/* ===== BOTTOM CHIN (speaker + USB-C) ===== */
-.fb-phone-chin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 10px 24px 15px;
-}
-.fb-phone-speaker {
-  width: 52px; height: 7px;
-  /* repeating dot pattern */
-  background-image: radial-gradient(circle, rgba(255,255,255,.24) 1.8px, transparent 1.8px);
-  background-size: 8px 7px;
-  background-repeat: repeat-x;
-  background-position: center;
-  border-radius: 4px;
-}
-.fb-phone-usbc {
-  width: 30px; height: 10px;
-  background: #05050a;
-  border-radius: 5px;
-  box-shadow:
-    inset 0 2px 4px rgba(0,0,0,.9),
-    inset 0 -1px 1px rgba(0,0,0,.4),
-    0 1px 1px rgba(255,255,255,.07);
 }
 
 /* ===== LOADING STATE ===== */
@@ -1530,7 +1531,7 @@ body::before {
   background: #f0f2f5;
   pointer-events: none;
   transition: opacity .4s ease;
-  border-radius: 42px;
+  border-radius: 40px;
   z-index: 4;
 }
 .fb-embed-loading.hidden { opacity: 0; pointer-events: none; }
@@ -1543,34 +1544,43 @@ body::before {
   color: #999;
 }
 
-.fb-phone-screen .fb-page { display: block; }
+/* App content starts below the status bar */
+.fb-phone-screen .fb-page { display: block; margin-top: var(--sbh); }
 
 @media (max-width: 900px) {
   .fb-grid { grid-template-columns: 1fr; }
   /* Phone first on mobile, copy/stats below */
   .fb-embed-col { order: 1; }
   .fb-copy      { order: 2; }
-  .fb-phone { width: 300px; border-radius: 48px; padding: 52px 11px 0; }
-  .fb-phone-screen { height: 530px; border-radius: 36px; }
-  .fb-phone-glass  { border-radius: 36px; }
-  .fb-embed-loading { border-radius: 36px; }
+  .fb-phone { --sbh: 52px; width: 300px; border-radius: 50px; padding: 4px; }
+  .fb-phone-screen { height: 615px; border-radius: 46px; border-width: 9px; }
+  .fb-phone-glass  { border-radius: 37px; }
+  .fb-embed-loading { border-radius: 37px; }
+  .fb-phone-island { width: 100px; height: 31px; top: 10px; }
+  .fb-sb-time { font-size: 14px; }
+  .fb-phone-statusbar { padding: 0 24px 0 30px; }
 }
 @media (max-width: 480px) {
   .fb-stats { gap: 2rem; }
-  .fb-phone { width: 268px; border-radius: 44px; padding: 50px 10px 0; }
-  .fb-phone-screen { height: 480px; border-radius: 32px; }
-  .fb-phone-glass  { border-radius: 32px; }
-  .fb-embed-loading { border-radius: 32px; }
+  .fb-phone { --sbh: 48px; width: 268px; border-radius: 46px; padding: 4px; }
+  .fb-phone-screen { height: 545px; border-radius: 42px; border-width: 8px; }
+  .fb-phone-glass  { border-radius: 34px; }
+  .fb-embed-loading { border-radius: 34px; }
+  .fb-phone-island { width: 90px; height: 28px; top: 9px; }
+  .fb-phone-camera { width: 11px; height: 11px; }
+  .fb-sb-time { font-size: 13px; }
+  .fb-phone-statusbar { padding: 0 20px 0 26px; }
+  .fb-sb-icons { gap: 5px; transform: scale(.9); transform-origin: right center; }
 }
 
 /* Covers the "X followers" text inside the FB embed header —
    white matches the FB page header background exactly */
 .fb-followers-mask {
   position: absolute;
-  top: 38px;
-  left: 58px;
+  top: calc(var(--sbh) + 31px);
+  left: 62px;
   right: 58px;
-  height: 20px;
+  height: 22px;
   background: #fff;
   z-index: 6;
   pointer-events: none;
@@ -1963,13 +1973,21 @@ body::before {
           <div class="fb-btn fb-btn-vol-down"></div>
           <div class="fb-btn fb-btn-power"></div>
 
-          <!-- Dynamic island sits on the frame, above the screen -->
-          <div class="fb-phone-island">
-            <div class="fb-phone-camera"></div>
-          </div>
-
           <!-- Screen -->
           <div class="fb-phone-screen" id="fbEmbedShell">
+            <!-- iOS status bar: time + signal/wifi/battery flanking the island -->
+            <div class="fb-phone-statusbar" aria-hidden="true">
+              <span class="fb-sb-time">9:41</span>
+              <div class="fb-sb-icons">
+                <svg width="18" height="12" viewBox="0 0 18 12" fill="#000" aria-hidden="true"><rect x="0" y="7.5" width="3" height="4.5" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="#000" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M1.5 4.4a10.5 10.5 0 0 1 14 0"/><path d="M4.1 7.1a7 7 0 0 1 8.8 0"/><path d="M6.6 9.7a3.5 3.5 0 0 1 3.8 0"/></svg>
+                <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x="0.6" y="0.6" width="20.8" height="10.8" rx="3.4" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.2"/><path d="M22.8 4v4a2.2 2.2 0 0 0 0-4z" fill="rgba(0,0,0,.4)"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="2" fill="#000"/></svg>
+              </div>
+            </div>
+            <!-- Dynamic island floats inside the screen -->
+            <div class="fb-phone-island">
+              <div class="fb-phone-camera"></div>
+            </div>
             <!-- Home indicator inside screen (matches real iPhone) -->
             <div class="fb-phone-home"></div>
             <!-- White mask over the "X followers" line in the FB embed header -->
@@ -1988,7 +2006,7 @@ body::before {
                  data-href="https://www.facebook.com/frostelite2.0"
                  data-tabs="timeline"
                  data-width=""
-                 data-height="610"
+                 data-height="614"
                  data-small-header="false"
                  data-adapt-container-width="true"
                  data-hide-cover="false"
@@ -1997,13 +2015,6 @@ body::before {
                 <a href="https://www.facebook.com/frostelite2.0">Frost Elite 2.0</a>
               </blockquote>
             </div>
-          </div>
-
-          <!-- Bottom chin: symmetrical speakers + USB-C -->
-          <div class="fb-phone-chin">
-            <div class="fb-phone-speaker"></div>
-            <div class="fb-phone-usbc"></div>
-            <div class="fb-phone-speaker"></div>
           </div>
         </div>
       </div>
