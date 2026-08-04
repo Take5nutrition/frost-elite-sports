@@ -991,6 +991,19 @@ body::before {
 }
 .footer-bottom a:hover { color: var(--ice); }
 
+.footer-credit {
+  margin-top: 1.1rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: .6;
+}
+.footer-credit a { border-bottom: 1px solid var(--line-soft); padding-bottom: 1px; }
+.footer-credit a:hover { color: var(--ice); border-bottom-color: var(--ice); }
+
 /* ============== SCROLL REVEAL ============== */
 .reveal {
   opacity: 0;
@@ -2109,6 +2122,11 @@ body::before {
     <div class="footer-bottom">
       <span>© <span id="year"></span> Frost Elite Sports</span>
       <a href="/terms-of-service">Terms</a>
+    </div>
+
+    <div class="footer-credit">
+      Proudly partnered with
+      <a href="https://take5athletics.com" target="_blank" rel="noopener noreferrer">Take5 Athletics</a>
     </div>
   </div>
 </footer>
