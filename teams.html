@@ -330,6 +330,23 @@ body::before {
   color: var(--bone);
 }
 
+/* Teams within an age group */
+.team-groups { display: flex; flex-direction: column; }
+.team-block + .team-block {
+  margin-top: 1.35rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--line-soft);
+}
+.team-label {
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--ice);
+  opacity: .8;
+  margin-bottom: .7rem;
+}
+
 /* 18U layout */
 @media (min-width: 1000px) {
   .age-group-18u .age-group-body {
@@ -339,7 +356,18 @@ body::before {
     align-items: start;
   }
   .age-group-18u .coaches-label { margin-bottom: 0; align-self: start; padding-top: .1rem; }
-  .age-group-18u .coach-list { flex-direction: row; flex-wrap: wrap; gap: 1rem 2rem; }
+  .age-group-18u .team-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .age-group-18u .team-block + .team-block {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+    border-left: 1px solid var(--line-soft);
+    padding-left: 2rem;
+  }
 }
 
 /* ============== CTA ============== */
@@ -516,14 +544,36 @@ body::before {
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
-          <div class="coach-list">
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Samantha</div>
+          <div class="team-groups">
+            <div class="team-block">
+              <div class="team-label">Team 1</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Brittany Burns</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Justin Howe</div>
+                </div>
+              </div>
             </div>
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Arntson</div>
+            <div class="team-block">
+              <div class="team-label">Team 2</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach John Arntson</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Kyle Mitchell</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Claire Davis</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -533,14 +583,32 @@ body::before {
       <div class="age-group reveal">
         <div class="age-group-header">
           <div class="age-label">12U</div>
-          <div class="age-badge">1 Team</div>
+          <div class="age-badge">2 Teams</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
-          <div class="coach-list">
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Asklar</div>
+          <div class="team-groups">
+            <div class="team-block">
+              <div class="team-label">Team 1</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Samantha Frost</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Lucy Rose</div>
+                </div>
+              </div>
+            </div>
+            <div class="team-block">
+              <div class="team-label">Team 2</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Jesse Asklar</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -554,14 +622,36 @@ body::before {
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
-          <div class="coach-list">
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Jason</div>
+          <div class="team-groups">
+            <div class="team-block">
+              <div class="team-label">Team 1</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Arthur Rowell</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Vu Nguyen</div>
+                </div>
+              </div>
             </div>
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Dukart</div>
+            <div class="team-block">
+              <div class="team-label">Team 2</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Abby Bradley</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Peyton Bradley</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Madison Asboe</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -571,18 +661,45 @@ body::before {
       <div class="age-group reveal">
         <div class="age-group-header">
           <div class="age-label">16U</div>
-          <div class="age-badge">2 Teams</div>
+          <div class="age-badge">3 Teams</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
-          <div class="coach-list">
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Cooper</div>
+          <div class="team-groups">
+            <div class="team-block">
+              <div class="team-label">Team 1</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Jason Schaffer</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Kaylee Schaffer</div>
+                </div>
+              </div>
             </div>
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Gibbons</div>
+            <div class="team-block">
+              <div class="team-label">Team 2</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Matt White</div>
+                </div>
+              </div>
+            </div>
+            <div class="team-block">
+              <div class="team-label">Team 3</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Chris Dukart</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Greg Moulton</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -592,22 +709,40 @@ body::before {
       <div class="age-group age-group-18u reveal">
         <div class="age-group-header">
           <div class="age-label">18U</div>
-          <div class="age-badge">3 Teams</div>
+          <div class="age-badge">2 Teams</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
-          <div class="coach-list">
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach David</div>
+          <div class="team-groups">
+            <div class="team-block">
+              <div class="team-label">Team 1</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach David Thompson</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Tami Hensley</div>
+                </div>
+              </div>
             </div>
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Sweeney</div>
-            </div>
-            <div class="coach-item">
-              <div class="coach-dot"></div>
-              <div class="coach-item-name">Coach Landon</div>
+            <div class="team-block">
+              <div class="team-label">Team 2</div>
+              <div class="coach-list">
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Landon Frost</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Samantha Frost</div>
+                </div>
+                <div class="coach-item">
+                  <div class="coach-dot"></div>
+                  <div class="coach-item-name">Coach Kirk Sweeney</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
