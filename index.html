@@ -18,7 +18,7 @@
 <!-- Athletic typography: Bebas Neue for big display, Oswald for athletic mid-tier, Inter Tight for body, JetBrains Mono for tactical labels -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
 /* =========================================================
@@ -81,7 +81,7 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 body::before {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: -6%;
   pointer-events: none;
   z-index: 9999;
   opacity: .045;
@@ -118,6 +118,9 @@ body::before {
   font-weight: 500;
   color: var(--ice-soft);
   letter-spacing: 0.01em;
+  /* Oswald ships no true italic; the synthetic slant overhangs the
+     following word, so give it a right bearing. */
+  margin-right: .12em;
 }
 
 .kicker {
@@ -525,52 +528,55 @@ body::before {
 .marquee {
   border-top: 1px solid var(--line-soft);
   border-bottom: 1px solid var(--line-soft);
-  padding: 1.5rem 0;
   background: var(--ink-2);
+  padding: 1.35rem 0;
+}
+/* Separate viewport so the edge fade never touches the hairline borders */
+.marquee-viewport {
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 .marquee-track {
   display: flex;
-  gap: 3rem;
+  align-items: center;
   white-space: nowrap;
-  animation: marquee 70s linear infinite;
   width: max-content;
+  animation: marquee 85s linear infinite;
+  will-change: transform;
 }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
 .marquee-item {
   font-family: var(--athletic);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.3rem, 2.5vw, 2.1rem);
   text-transform: uppercase;
-  letter-spacing: .02em;
-  color: var(--bone);
-  display: flex;
+  letter-spacing: .05em;
+  color: var(--bone-2);
+  opacity: .8;
+  display: inline-flex;
   align-items: center;
-  gap: 3rem;
 }
+/* Thin ice diamond between words */
 .marquee-item::after {
   content: "";
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  vertical-align: middle;
-  margin: 0 .1em;
-  position: relative;
-  top: -1px;
-}
-.marquee-item:nth-child(odd)::after {
-  /* Baseball — seams at x=4.5/x=15.5, ctrl x=6.5/x=13.5 for wider separation */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%230EA5E9' stroke='%230284c7' stroke-width='.5'/%3E%3Cpath d='M4.5 2C6.5 5 6.5 15 4.5 18' fill='none' stroke='%23e0f2fe' stroke-width='1.3' stroke-linecap='round'/%3E%3Cpath d='M15.5 2C13.5 5 13.5 15 15.5 18' fill='none' stroke='%23e0f2fe' stroke-width='1.3' stroke-linecap='round'/%3E%3Cpath d='M5 4.5l2-.8M6 7.5l1.5-.3M6 10.5l1.5 0M6 13.5l1.5.3M5 16l2 .8' fill='none' stroke='%23e0f2fe' stroke-width='.9' stroke-linecap='round'/%3E%3Cpath d='M15 4.5l-2-.8M14 7.5l-1.5-.3M14 10.5l-1.5 0M14 13.5l-1.5.3M15 16l-2 .8' fill='none' stroke='%23e0f2fe' stroke-width='.9' stroke-linecap='round'/%3E%3C/svg%3E");
-}
-.marquee-item:nth-child(even)::after {
-  /* Softball — same seam geometry, lighter blue */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%2338BDF8' stroke='%230EA5E9' stroke-width='.5'/%3E%3Cpath d='M4.5 2C6.5 5 6.5 15 4.5 18' fill='none' stroke='%23075985' stroke-width='1.3' stroke-linecap='round'/%3E%3Cpath d='M15.5 2C13.5 5 13.5 15 15.5 18' fill='none' stroke='%23075985' stroke-width='1.3' stroke-linecap='round'/%3E%3Cpath d='M5 4.5l2-.8M6 7.5l1.5-.3M6 10.5l1.5 0M6 13.5l1.5.3M5 16l2 .8' fill='none' stroke='%23075985' stroke-width='.9' stroke-linecap='round'/%3E%3Cpath d='M15 4.5l-2-.8M14 7.5l-1.5-.3M14 10.5l-1.5 0M14 13.5l-1.5.3M15 16l-2 .8' fill='none' stroke='%23075985' stroke-width='.9' stroke-linecap='round'/%3E%3C/svg%3E");
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin: 0 clamp(1.6rem, 3.2vw, 2.9rem);
+  background: var(--ice);
+  transform: rotate(45deg);
+  opacity: .5;
 }
 @keyframes marquee {
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; transform: none; }
+  .marquee-viewport { overflow-x: auto; }
 }
 
 /* ============== PROGRAMS — modular grid ============== */
@@ -823,6 +829,16 @@ body::before {
   transition: border-color .4s var(--ease);
 }
 .coach:hover { border-color: rgba(56,189,248,.4); }
+/* Branded monogram stands in for a missing coach portrait —
+   reads as intentional rather than a broken asset. */
+.placeholder .monogram {
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 7vw, 5rem);
+  line-height: 1;
+  letter-spacing: .05em;
+  color: var(--ice-soft);
+  opacity: .28;
+}
 .coach .placeholder {
   width: 100%; height: 100%;
   display: grid; place-items: center;
@@ -1136,7 +1152,7 @@ body::before {
 }
 .home-event-date .dy {
   font-family: var(--display); font-size: 4rem; line-height: 1;
-  color: var(--bone); font-weight: 700; margin: .1rem 0;
+  color: var(--bone); font-weight: 400; margin: .1rem 0;
 }
 .home-event-date .dy.dy-season { font-size: 2.4rem; padding: .35rem 0; }
 .home-event-date .dow {
@@ -1260,7 +1276,7 @@ body::before {
 .event-banner-text {
   font-family: var(--mono); font-size: .65rem; letter-spacing: .06em; color: rgba(255,255,255,.8);
 }
-.event-banner-text strong { color: #fff; }
+.event-banner-text strong { color: #fff; font-weight: 600; }
 .event-banner-link {
   font-family: var(--mono); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
   color: var(--ink); background: var(--ice); padding: .35rem .9rem; border-radius: 100px;
@@ -1617,7 +1633,10 @@ body::before {
 <header class="header" id="header">
   <div class="header-inner">
     <a href="#top" class="brand">
-      <img src="Public/IMG_9206.PNG" alt="Frost Elite" style="height:54px;width:auto;" />
+      <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp" />
+        <img src="assets/img/logo.png" alt="Frost Elite" width="320" height="176" fetchpriority="high" style="height:54px;width:auto;" />
+      </picture>
     </a>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
@@ -1642,12 +1661,11 @@ body::before {
   <div class="hero-media">
     <video autoplay muted loop playsinline preload="metadata"
            poster="assets/img/hero-poster.jpg"
+           disablepictureinpicture disableremoteplayback
            onerror="this.style.display='none'; document.getElementById('heroFallback').style.display='grid';">
-      <source src="Public/promo.MOV" type="video/mp4" />
+      <source src="assets/video/hero.mp4"  type="video/mp4" />
     </video>
-    <div class="placeholder" id="heroFallback" style="display:none;">
-      [ Hero video — drop promo.mp4 in assets/video/ ]
-    </div>
+    <div class="placeholder" id="heroFallback" style="display:none;" aria-hidden="true"></div>
   </div>
 
   <div class="hero-rail">Frost Elite Sports — Est. Damascus, OR</div>
@@ -1702,25 +1720,27 @@ body::before {
 </section>
 
 <!-- ============== MARQUEE ============== -->
-<div class="marquee">
-  <div class="marquee-track">
-    <span class="marquee-item">Hitting</span>
-    <span class="marquee-item">Pitching</span>
-    <span class="marquee-item">Catching</span>
-    <span class="marquee-item">Defense</span>
-    <span class="marquee-item">Recruiting</span>
-    <span class="marquee-item">Showcases</span>
-    <span class="marquee-item">Travel Teams</span>
-    <span class="marquee-item">College Prep</span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Hitting</span>
-    <span class="marquee-item">Pitching</span>
-    <span class="marquee-item">Catching</span>
-    <span class="marquee-item">Defense</span>
-    <span class="marquee-item">Recruiting</span>
-    <span class="marquee-item">Showcases</span>
-    <span class="marquee-item">Travel Teams</span>
-    <span class="marquee-item">College Prep</span>
+<div class="marquee" aria-label="What we train">
+  <div class="marquee-viewport">
+    <div class="marquee-track">
+      <span class="marquee-item">Hitting</span>
+      <span class="marquee-item">Pitching</span>
+      <span class="marquee-item">Catching</span>
+      <span class="marquee-item">Defense</span>
+      <span class="marquee-item">Recruiting</span>
+      <span class="marquee-item">Showcases</span>
+      <span class="marquee-item">Travel Teams</span>
+      <span class="marquee-item">College Prep</span>
+      <!-- duplicate set — keeps the loop seamless at translate(-50%) -->
+      <span class="marquee-item">Hitting</span>
+      <span class="marquee-item">Pitching</span>
+      <span class="marquee-item">Catching</span>
+      <span class="marquee-item">Defense</span>
+      <span class="marquee-item">Recruiting</span>
+      <span class="marquee-item">Showcases</span>
+      <span class="marquee-item">Travel Teams</span>
+      <span class="marquee-item">College Prep</span>
+    </div>
   </div>
 </div>
 
@@ -1902,7 +1922,7 @@ body::before {
       <article class="coach reveal">
         <img src="assets/img/coach-landon.jpg" alt="Landon Frost" loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-        <div class="placeholder" style="display:none;">[ Landon Frost ]</div>
+        <div class="placeholder" style="display:none;" aria-hidden="true"><span class="monogram">LF</span></div>
         <div class="coach-meta">
           <div class="coach-name">Landon Frost</div>
           <div class="coach-role">Founder / Head Coach</div>
@@ -1912,7 +1932,7 @@ body::before {
       <article class="coach reveal">
         <img src="assets/img/coach-samantha.jpg" alt="Samantha Frost" loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-        <div class="placeholder" style="display:none;">[ Samantha Frost ]</div>
+        <div class="placeholder" style="display:none;" aria-hidden="true"><span class="monogram">SF</span></div>
         <div class="coach-meta">
           <div class="coach-name">Samantha Frost</div>
           <div class="coach-role">Founder / Coach</div>
@@ -2203,20 +2223,6 @@ document.querySelectorAll('.program').forEach(card => {
     card.style.setProperty('--my', `${e.clientY - r.top}px`);
   });
 });
-
-// Replace brand mark with logo if available
-(function tryLogo() {
-  const img = new Image();
-  img.onload = () => {
-    const mark = document.getElementById('brandMark');
-    if (mark) {
-      mark.innerHTML = `<img src="Public/IMG_9206.PNG" alt="Frost Elite" style="width:100%;height:100%;object-fit:contain;border-radius:50%;" />`;
-      mark.style.background = 'transparent';
-      mark.style.boxShadow = 'none';
-    }
-  };
-  img.src = 'Public/IMG_9206.PNG';
-})();
 </script>
 
 <script src="events-data.js"></script>

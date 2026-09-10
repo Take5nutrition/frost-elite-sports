@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
 :root {
@@ -60,7 +60,7 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 body::before {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: -6%;
   pointer-events: none;
   z-index: 9999;
   opacity: .045;
@@ -94,6 +94,7 @@ body::before {
   font-style: italic;
   font-weight: 500;
   color: var(--ice-soft);
+  margin-right: .12em;
 }
 .kicker {
   font-family: var(--mono);
@@ -304,6 +305,16 @@ body::before {
   width: 100%; height: 100%;
   object-fit: cover;
   filter: grayscale(.2) contrast(1.05);
+}
+/* Branded monogram stands in for a missing coach portrait —
+   reads as intentional rather than a broken asset. */
+.placeholder .monogram {
+  font-family: var(--display);
+  font-size: clamp(3.2rem, 7vw, 5rem);
+  line-height: 1;
+  letter-spacing: .05em;
+  color: var(--ice-soft);
+  opacity: .28;
 }
 .coach-photo-frame .placeholder {
   width: 100%; height: 100%;
@@ -691,7 +702,10 @@ body::before {
 <header class="header" id="header">
   <div class="header-inner">
     <a href="/" class="brand">
-      <img src="Public/IMG_9206.PNG" alt="Frost Elite" style="height:62px;width:auto;" />
+      <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp" />
+        <img src="assets/img/logo.png" alt="Frost Elite" width="320" height="176" fetchpriority="high" style="height:62px;width:auto;" />
+      </picture>
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -726,7 +740,7 @@ body::before {
         <div class="coach-photo-frame">
           <img src="assets/img/coach-landon.jpg" alt="Landon Frost"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-          <div class="placeholder" style="display:none;">[ Landon Frost<br/>assets/img/coach-landon.jpg ]</div>
+          <div class="placeholder" style="display:none;" aria-hidden="true"><span class="monogram">LF</span></div>
         </div>
         <div class="coach-photo-tags">
           <span class="tag tag-ice">Scholarship Athlete</span>
@@ -894,7 +908,7 @@ body::before {
         <div class="coach-photo-frame">
           <img src="assets/img/coach-samantha.jpg" alt="Samantha Frost"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
-          <div class="placeholder" style="display:none;">[ Samantha Frost<br/>assets/img/coach-samantha.jpg ]</div>
+          <div class="placeholder" style="display:none;" aria-hidden="true"><span class="monogram">SF</span></div>
         </div>
         <div class="coach-photo-tags">
           <span class="tag tag-ice">Pitcher of the Year — 4 Years</span>

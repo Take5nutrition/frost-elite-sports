@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
 :root {
@@ -60,7 +60,7 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 body::before {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: -6%;
   pointer-events: none;
   z-index: 9999;
   opacity: .045;
@@ -94,6 +94,7 @@ body::before {
   font-style: italic;
   font-weight: 500;
   color: var(--ice-soft);
+  margin-right: .12em;
 }
 .kicker {
   font-family: var(--mono);
@@ -674,7 +675,10 @@ body::before {
 <header class="header" id="header">
   <div class="header-inner">
     <a href="/" class="brand">
-      <img src="Public/IMG_9206.PNG" alt="Frost Elite" />
+      <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp" />
+        <img src="assets/img/logo.png" alt="Frost Elite" width="320" height="176" fetchpriority="high" />
+      </picture>
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
       <span></span><span></span><span></span>

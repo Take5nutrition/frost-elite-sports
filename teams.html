@@ -11,7 +11,7 @@
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
 :root {
@@ -60,7 +60,7 @@ button { font: inherit; cursor: pointer; border: 0; background: none; color: inh
 body::before {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: -6%;
   pointer-events: none;
   z-index: 9999;
   opacity: .045;
@@ -94,6 +94,7 @@ body::before {
   font-style: italic;
   font-weight: 500;
   color: var(--ice-soft);
+  margin-right: .12em;
 }
 .kicker {
   font-family: var(--mono);
@@ -246,10 +247,13 @@ body::before {
   gap: 1.5rem;
 }
 @media (min-width: 700px) { .age-groups { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .age-groups { grid-template-columns: repeat(3, 1fr); } }
-
-/* 18U spans full row on large screens */
-@media (min-width: 1000px) { .age-group-18u { grid-column: span 3; } }
+/* Five cards on a 6-col track: three across, then two across.
+   Both rows fill edge to edge — no orphaned card, no dead columns. */
+@media (min-width: 1000px) {
+  .age-groups { grid-template-columns: repeat(6, 1fr); }
+  .age-group { grid-column: span 2; }
+  .age-group:nth-last-child(-n+2) { grid-column: span 3; }
+}
 @media (min-width: 700px) and (max-width: 999px) { .age-group-18u { grid-column: span 2; } }
 
 .age-group {
@@ -345,29 +349,6 @@ body::before {
   color: var(--ice);
   opacity: .8;
   margin-bottom: .7rem;
-}
-
-/* 18U layout */
-@media (min-width: 1000px) {
-  .age-group-18u .age-group-body {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-  .age-group-18u .coaches-label { margin-bottom: 0; align-self: start; padding-top: .1rem; }
-  .age-group-18u .team-groups {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2rem;
-  }
-  .age-group-18u .team-block + .team-block {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
-    border-left: 1px solid var(--line-soft);
-    padding-left: 2rem;
-  }
 }
 
 /* ============== CTA ============== */
@@ -492,7 +473,10 @@ body::before {
 <header class="header" id="header">
   <div class="header-inner">
     <a href="/" class="brand">
-      <img src="Public/IMG_9206.PNG" alt="Frost Elite" />
+      <picture>
+        <source srcset="assets/img/logo.webp" type="image/webp" />
+        <img src="assets/img/logo.png" alt="Frost Elite" width="320" height="176" fetchpriority="high" />
+      </picture>
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
       <span></span><span></span><span></span>
