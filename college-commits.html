@@ -41,6 +41,41 @@
   --ease: cubic-bezier(.2,.7,.2,1);
 }
 
+/* =========================================================
+   LIGHT BLOCK
+   Remaps the palette tokens inside a section so every
+   descendant — headings, rules, cards, buttons — inverts
+   automatically instead of needing its own light variant.
+   Accent and muted tones are darkened to hold >=4.5:1 on bone.
+   ========================================================= */
+.section--light {
+  --ink:       #F4F1EA;
+  --ink-2:     #EDE9E0;
+  --ink-3:     #E6E1D6;
+  --black:     #EDE9E0;
+  --bone:      #0B1220;
+  --bone-2:    #46505F;
+  --text:      #131C2B;
+  --muted:     #5C6472;
+  --ice:       #08699A;
+  --ice-2:     #085C86;
+  --ice-soft:  #1285BB;
+  --ice-glow:  #08699A;
+  --line:      rgba(8,105,154,.30);
+  --line-soft: rgba(11,18,32,.13);
+  background: var(--ink);
+  color: var(--text);
+}
+/* Oversized ghost numerals / monograms are decorative but must not vanish
+   on the lighter ground — lift them from the dark-theme opacity. */
+.section--light .monogram { opacity: .38; }
+.section--light .step-card-num { color: rgba(11,18,32,.13); }
+/* Hairline seams where a light block meets the dark page */
+.section--light + :not(.section--light),
+:not(.section--light) + .section--light { border-top: 1px solid rgba(11,18,32,.10); }
+/* The global grain is tuned for dark ground; soften it over light blocks */
+.section--light { isolation: isolate; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -256,6 +291,7 @@ body::before {
   position: relative;
 }
 .commit-photo img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 15%;
@@ -476,7 +512,7 @@ body::before {
 </div>
 
 <!-- COMMITS GRID -->
-<section class="commits-section">
+<section class="commits-section section--light">
   <div class="wrap">
     <div class="commits-grid" id="commitsGrid"></div>
     <div class="no-results" id="noResults">No athletes match your search.</div>
@@ -567,7 +603,7 @@ const commits = [
   { name: "Ally Downing",       school: "Linfield University",                     photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/linfield.sidearmsports.com/images/2026/1/12/allydowning.jpg" },
   { name: "Ashley Sutton",      school: "Linfield University",                     photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/linfield.sidearmsports.com/images/2025/1/5/ashleysutton.jpg" },
   { name: "Aubrielle Clement",  school: "Mt. Hood Community College" },
-  { name: "Ava Eib",            school: "Lower Columbia College",                  photo: "https://images.sidearmdev.com/convert?url=https%3a%2f%2fdxbhsrqyrr690.cloudfront.net%2fsidearm.nextgen.sites%2flcc.sidearmsports.com%2fimages%2f2025%2f11%2f5%2fAva_Eib.png&width=300" },
+  { name: "Ava Eib",            school: "Lower Columbia College" },
   { name: "Brooklyn McCormick", school: "University of Dubuque" },
   { name: "Calli Weaving",      school: "Black Hills State University" },
   { name: "Camille Schmitz",    school: "Monterey Peninsula College",              photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/eousports.com/images/2026/1/16/P1217552.jpg" },
@@ -590,7 +626,7 @@ const commits = [
   { name: "Kaelynn Balovich",   school: "North Park University",                   photo: "https://images.sidearmdev.com/convert?url=https%3a%2f%2fdxbhsrqyrr690.cloudfront.net%2fsidearm.nextgen.sites%2fathletics.northpark.edu%2fimages%2f2026%2f3%2f2%2fBalovich.jpg&type=webp" },
   { name: "Kaiya Balovich",     school: "North Park University",                   photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/athletics.northpark.edu/images/2026/1/16/HEAD-12.jpg" },
   { name: "Kaiya Cheeks",       school: "Pacific University" },
-  { name: "Kalani Lyman",       school: "Columbia Basin College",                  photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/cbchawks.com/images/2026/1/24/kimfetrow2025_kimfetrow2025_DSC_9165-Edit.jpg" },
+  { name: "Kalani Lyman",       school: "Columbia Basin College" },
   { name: "Kalli True",         school: "Whitworth University",                    photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/whitworthpirates.com/images/2026/1/28/TrueKalli26.jpg" },
   { name: "Kameron Farmer",     school: "Warner Pacific University",               photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/wpcknights.sidearmsports.com/images/2021/11/23/IMG_4221.jpg" },
   { name: "Kari Oberman",       school: "Lassen University" },
@@ -605,7 +641,7 @@ const commits = [
   { name: "Lucy Rose",          school: "University of Oregon (Club)" },
   { name: "Luke Porter",        school: "Linfield University",                     photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/linfield.sidearmsports.com/images/2026/1/12/lukeporter.jpg" },
   { name: "Maddie Wilks",       school: "Florida International University" },
-  { name: "Madison Johnson",    school: "Bushnell University",                     photo: "https://dxbhsrqyrr690.cloudfront.net/images/2026/2/17/SB_Johnson_2026.jpg" },
+  { name: "Madison Johnson",    school: "Bushnell University" },
   { name: "Maili Jackson",      school: "Waldorf University" },
   { name: "Megan Landes",       school: "Pacific Lutheran University",             photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/plu.sidearmsports.com/images/2025/12/19/Landes.JPG" },
   { name: "Melia Cordon",       school: "University of Nevada, Reno",              photo: "https://nevadawolfpack.com/images/2022/1/31/FS201115.jpg" },
@@ -613,7 +649,7 @@ const commits = [
   { name: "Mercedez Flores",    school: "Clark Community College",                 photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/clark.sidearmsports.com/images/2026/1/13/M_Berduo.png" },
   { name: "Mia Ewell",          school: "Morgan State University",                 photo: "https://morganstatebears.com/images/2024/2/4/13_Mia_Ewell.jpg" },
   { name: "Mike Miller",        school: "Catholic University of America",          photo: "https://dbukjj6eu5tsf.cloudfront.net/sidearm.sites/cath.sidearmsports.com/images/2023/7/27/michael_miller_bsb_2022_23.jpg" },
-  { name: "Morgan Docker",      school: "Warner Pacific University",               photo: "https://dxbhsrqyrr690.cloudfront.net/images/2024/1/4/Screenshot_2024-01-04_132214.jpg" },
+  { name: "Morgan Docker",      school: "Warner Pacific University" },
   { name: "Natalie Brinda",     school: "Linfield University",                     photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/linfield.sidearmsports.com/images/2025/1/5/nataliebrinda.jpg" },
   { name: "Payton Holman",      school: "Pacific University" },
   { name: "Rachel Rotunno",     school: "Occidental University",                   photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/oxyathletics.com/images/2026/1/23/rotunno__rachel.png" },
@@ -623,7 +659,7 @@ const commits = [
   { name: "Summer St John",     school: "Yakima Valley College" },
   { name: "Suntaya Riddle",     school: "Mt. Hood Community College" },
   { name: "Susie Radford",      school: "Central Florida CC" },
-  { name: "Taylor Gorza",       school: "Warner Pacific University",               photo: "https://dxbhsrqyrr690.cloudfront.net/images/2026/2/2/_A742551.jpg" },
+  { name: "Taylor Gorza",       school: "Warner Pacific University" },
   { name: "Vinny Salvione",     school: "University of Portland",                  photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/portlandpilots.com/images/2023/10/18/Salvione_Vinny23.JPG" },
   { name: "Zeke Cruz",          school: "Oregon Tech University",                  photo: "https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/oit.sidearmsports.com/images/2022/3/16/Zeke_Cruz.jpg" },
 ];
@@ -647,10 +683,8 @@ commits.forEach(c => {
   card.dataset.school = c.school.toLowerCase();
   card.innerHTML = `
     <div class="commit-photo">
-      ${c.photo
-        ? `<img src="${c.photo}" alt="${c.name}" loading="lazy" />`
-        : `<div class="commit-photo-placeholder"><svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" color="#38BDF8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>`
-      }
+      <div class="commit-photo-placeholder"><svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" color="#38BDF8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+      ${c.photo ? `<img src="${c.photo}" alt="${c.name}" loading="lazy" onerror="this.remove();" />` : ``}
     </div>
     <div class="commit-info">
       <div class="commit-name">${c.name}</div>

@@ -41,6 +41,41 @@
   --ease: cubic-bezier(.2,.7,.2,1);
 }
 
+/* =========================================================
+   LIGHT BLOCK
+   Remaps the palette tokens inside a section so every
+   descendant — headings, rules, cards, buttons — inverts
+   automatically instead of needing its own light variant.
+   Accent and muted tones are darkened to hold >=4.5:1 on bone.
+   ========================================================= */
+.section--light {
+  --ink:       #F4F1EA;
+  --ink-2:     #EDE9E0;
+  --ink-3:     #E6E1D6;
+  --black:     #EDE9E0;
+  --bone:      #0B1220;
+  --bone-2:    #46505F;
+  --text:      #131C2B;
+  --muted:     #5C6472;
+  --ice:       #08699A;
+  --ice-2:     #085C86;
+  --ice-soft:  #1285BB;
+  --ice-glow:  #08699A;
+  --line:      rgba(8,105,154,.30);
+  --line-soft: rgba(11,18,32,.13);
+  background: var(--ink);
+  color: var(--text);
+}
+/* Oversized ghost numerals / monograms are decorative but must not vanish
+   on the lighter ground — lift them from the dark-theme opacity. */
+.section--light .monogram { opacity: .38; }
+.section--light .step-card-num { color: rgba(11,18,32,.13); }
+/* Hairline seams where a light block meets the dark page */
+.section--light + :not(.section--light),
+:not(.section--light) + .section--light { border-top: 1px solid rgba(11,18,32,.10); }
+/* The global grain is tuned for dark ground; soften it over light blocks */
+.section--light { isolation: isolate; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -780,7 +815,7 @@ body::before {
 </section>
 
 <!-- WHAT WE TRAIN -->
-<section class="section section-alt">
+<section class="section section-alt section--light">
   <div class="wrap">
     <div class="train-grid">
       <div class="reveal">
@@ -899,7 +934,7 @@ body::before {
 </section>
 
 <!-- BOOKING STEPS -->
-<section class="section section-alt">
+<section class="section section-alt section--light">
   <div class="wrap">
     <div class="section-head">
       <div class="reveal">

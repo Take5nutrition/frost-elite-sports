@@ -41,6 +41,41 @@
   --ease: cubic-bezier(.2,.7,.2,1);
 }
 
+/* =========================================================
+   LIGHT BLOCK
+   Remaps the palette tokens inside a section so every
+   descendant — headings, rules, cards, buttons — inverts
+   automatically instead of needing its own light variant.
+   Accent and muted tones are darkened to hold >=4.5:1 on bone.
+   ========================================================= */
+.section--light {
+  --ink:       #F4F1EA;
+  --ink-2:     #EDE9E0;
+  --ink-3:     #E6E1D6;
+  --black:     #EDE9E0;
+  --bone:      #0B1220;
+  --bone-2:    #46505F;
+  --text:      #131C2B;
+  --muted:     #5C6472;
+  --ice:       #08699A;
+  --ice-2:     #085C86;
+  --ice-soft:  #1285BB;
+  --ice-glow:  #08699A;
+  --line:      rgba(8,105,154,.30);
+  --line-soft: rgba(11,18,32,.13);
+  background: var(--ink);
+  color: var(--text);
+}
+/* Oversized ghost numerals / monograms are decorative but must not vanish
+   on the lighter ground — lift them from the dark-theme opacity. */
+.section--light .monogram { opacity: .38; }
+.section--light .step-card-num { color: rgba(11,18,32,.13); }
+/* Hairline seams where a light block meets the dark page */
+.section--light + :not(.section--light),
+:not(.section--light) + .section--light { border-top: 1px solid rgba(11,18,32,.10); }
+/* The global grain is tuned for dark ground; soften it over light blocks */
+.section--light { isolation: isolate; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -521,7 +556,7 @@ body::before {
 </section>
 
 <!-- AGE GROUPS -->
-<section class="age-groups-section">
+<section class="age-groups-section section--light">
   <div class="wrap">
     <div class="section-head">
       <div class="reveal">
@@ -580,13 +615,12 @@ body::before {
       <div class="age-group reveal">
         <div class="age-group-header">
           <div class="age-label">12U</div>
-          <div class="age-badge">2 Teams</div>
+          <div class="age-badge">1 Team</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
-              <div class="team-label">Team 1</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -598,15 +632,6 @@ body::before {
                 </div>
               </div>
             </div>
-            <div class="team-block">
-              <div class="team-label">Team 2</div>
-              <div class="coach-list">
-                <div class="coach-item">
-                  <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Jesse Asklar</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -615,26 +640,12 @@ body::before {
       <div class="age-group reveal">
         <div class="age-group-header">
           <div class="age-label">14U</div>
-          <div class="age-badge">2 Teams</div>
+          <div class="age-badge">1 Team</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
-              <div class="team-label">Team 1</div>
-              <div class="coach-list">
-                <div class="coach-item">
-                  <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Arthur Rowell</div>
-                </div>
-                <div class="coach-item">
-                  <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Vu Nguyen</div>
-                </div>
-              </div>
-            </div>
-            <div class="team-block">
-              <div class="team-label">Team 2</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -643,10 +654,6 @@ body::before {
                 <div class="coach-item">
                   <div class="coach-dot"></div>
                   <div class="coach-item-name">Coach Peyton Bradley</div>
-                </div>
-                <div class="coach-item">
-                  <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Madison Asboe</div>
                 </div>
               </div>
             </div>
@@ -658,7 +665,7 @@ body::before {
       <div class="age-group reveal">
         <div class="age-group-header">
           <div class="age-label">16U</div>
-          <div class="age-badge">3 Teams</div>
+          <div class="age-badge">2 Teams</div>
         </div>
         <div class="age-group-body">
           <div class="coaches-label">Coaching Staff</div>
@@ -668,25 +675,16 @@ body::before {
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Jason Schaffer</div>
+                  <div class="coach-item-name">Coach Matt White</div>
                 </div>
                 <div class="coach-item">
                   <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Kaylee Schaffer</div>
+                  <div class="coach-item-name">Coach Ryan Moore</div>
                 </div>
               </div>
             </div>
             <div class="team-block">
               <div class="team-label">Team 2</div>
-              <div class="coach-list">
-                <div class="coach-item">
-                  <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach Matt White</div>
-                </div>
-              </div>
-            </div>
-            <div class="team-block">
-              <div class="team-label">Team 3</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -702,7 +700,7 @@ body::before {
         </div>
       </div>
 
-      <!-- 18U — spans full width -->
+      <!-- 18U -->
       <div class="age-group age-group-18u reveal">
         <div class="age-group-header">
           <div class="age-label">18U</div>
@@ -716,7 +714,7 @@ body::before {
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
-                  <div class="coach-item-name">Coach David Thompson</div>
+                  <div class="coach-item-name">Coach David Thomason</div>
                 </div>
                 <div class="coach-item">
                   <div class="coach-dot"></div>
