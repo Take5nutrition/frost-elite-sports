@@ -376,14 +376,95 @@ body::before {
   padding-top: 1.35rem;
   border-top: 1px solid var(--line-soft);
 }
+/* Team name — now the real name (Burns, Arntson…), not "Team 1" */
 .team-label {
+  font-family: var(--athletic);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ice);
+  margin-bottom: .75rem;
+}
+
+/* ============== ROSTER DISCLOSURE ============== */
+/* Native <details> — opens with no JS and is keyboard accessible. */
+.roster {
+  margin-top: .9rem;
+  border-top: 1px solid var(--line-soft);
+}
+.roster > summary {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .8rem 0 .2rem;
+  cursor: pointer;
+  list-style: none;
   font-family: var(--mono);
-  font-size: .6rem;
+  font-size: .58rem;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--ice);
-  opacity: .8;
-  margin-bottom: .7rem;
+  transition: opacity .25s var(--ease);
+}
+.roster > summary::-webkit-details-marker { display: none; }
+.roster > summary:hover { opacity: .72; }
+.roster > summary:focus-visible {
+  outline: 2px solid var(--ice);
+  outline-offset: 3px;
+}
+.roster-count {
+  color: var(--muted);
+  letter-spacing: .12em;
+}
+/* Chevron, rotates on open */
+.roster > summary::after {
+  content: "";
+  width: 6px; height: 6px;
+  margin-left: auto;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform .3s var(--ease);
+}
+.roster[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+
+.roster-list {
+  list-style: none;
+  margin: .85rem 0 .35rem;
+  display: grid;
+  gap: .12rem;
+}
+.roster-list li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  align-items: baseline;
+  gap: .75rem;
+  padding: .3rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.roster-list li:last-child { border-bottom: none; }
+.roster-num {
+  font-family: var(--mono);
+  font-size: .66rem;
+  color: var(--ice);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.roster-name {
+  font-family: var(--sans);
+  font-size: .84rem;
+  letter-spacing: .01em;
+  color: var(--text);
+}
+.roster[open] .roster-list { animation: rosterIn .28s var(--ease) both; }
+@keyframes rosterIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roster[open] .roster-list { animation: none; }
+  .roster > summary::after { transition: none; }
 }
 
 /* ============== CTA ============== */
@@ -578,7 +659,7 @@ body::before {
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
-              <div class="team-label">Team 1</div>
+              <div class="team-label">Burns</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -589,9 +670,56 @@ body::before {
                   <div class="coach-item-name">Coach Justin Howe</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">10 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">33</span>
+                    <span class="roster-name">Freyja Eichner</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">23</span>
+                    <span class="roster-name">Scarlett Clark</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">17</span>
+                    <span class="roster-name">Nora Curcio</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">13</span>
+                    <span class="roster-name">Sydeney Roselle</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">5</span>
+                    <span class="roster-name">Marley Howe</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">10</span>
+                    <span class="roster-name">Lexi Burns</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">1</span>
+                    <span class="roster-name">Addison Burns</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">4</span>
+                    <span class="roster-name">Amelia Ferrante</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">7</span>
+                    <span class="roster-name">Melody Cowan</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">18</span>
+                    <span class="roster-name">Zadie Daggett</span>
+                  </li>
+                </ul>
+              </details>
             </div>
             <div class="team-block">
-              <div class="team-label">Team 2</div>
+              <div class="team-label">Arntson</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -606,6 +734,57 @@ body::before {
                   <div class="coach-item-name">Coach Claire Davis</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">11 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">9</span>
+                    <span class="roster-name">Ava Arntson</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">8</span>
+                    <span class="roster-name">Mila Vidalez</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">13</span>
+                    <span class="roster-name">Jocelyn Nelson</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">15</span>
+                    <span class="roster-name">Charlotte Rudge</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">23</span>
+                    <span class="roster-name">Tessa Mitchell</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">5</span>
+                    <span class="roster-name">Kamille Langer</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">2</span>
+                    <span class="roster-name">Eleanor Davis</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">20</span>
+                    <span class="roster-name">Nadia Valdovinos</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">21</span>
+                    <span class="roster-name">Kenlie Ware</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">27</span>
+                    <span class="roster-name">Brooke Carr</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">22</span>
+                    <span class="roster-name">Ally Pascoe</span>
+                  </li>
+                </ul>
+              </details>
             </div>
           </div>
         </div>
@@ -621,6 +800,7 @@ body::before {
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
+              <div class="team-label">Samantha</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -631,6 +811,61 @@ body::before {
                   <div class="coach-item-name">Coach Lucy Rose</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">12 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">9</span>
+                    <span class="roster-name">Abigail Dukart</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">3</span>
+                    <span class="roster-name">Lacey Pokladnik</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">10</span>
+                    <span class="roster-name">Maya Frost</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">21</span>
+                    <span class="roster-name">Harper Kabza</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">24</span>
+                    <span class="roster-name">Kaleesi Roderick</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">12</span>
+                    <span class="roster-name">Zaleah Jeannis</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">23</span>
+                    <span class="roster-name">Olivia Wirkuty</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">14</span>
+                    <span class="roster-name">Penelope Hogan-Telles</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">32</span>
+                    <span class="roster-name">Lilah Gonzales</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">19</span>
+                    <span class="roster-name">Ailey Jones</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">15</span>
+                    <span class="roster-name">Ruby Rygg</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">22</span>
+                    <span class="roster-name">Emma Gentry</span>
+                  </li>
+                </ul>
+              </details>
             </div>
           </div>
         </div>
@@ -646,6 +881,7 @@ body::before {
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
+              <div class="team-label">Bradley</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -656,6 +892,61 @@ body::before {
                   <div class="coach-item-name">Coach Peyton Bradley</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">12 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">00</span>
+                    <span class="roster-name">Avery Schultz</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">4</span>
+                    <span class="roster-name">Saniiah Nunley</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">99</span>
+                    <span class="roster-name">Azaria Mazurenko</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">28</span>
+                    <span class="roster-name">Adalynn Kabza</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">8</span>
+                    <span class="roster-name">Caylee Crebs</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">5</span>
+                    <span class="roster-name">Margo Riordan</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">2</span>
+                    <span class="roster-name">Bethany Ashby</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">14</span>
+                    <span class="roster-name">Jocelyn Roeter</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">27</span>
+                    <span class="roster-name">MacKenzie Ellis</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">17</span>
+                    <span class="roster-name">Èla Morrison</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">93</span>
+                    <span class="roster-name">Breese Moore</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">44</span>
+                    <span class="roster-name">Kenzie Moulton</span>
+                  </li>
+                </ul>
+              </details>
             </div>
           </div>
         </div>
@@ -671,7 +962,7 @@ body::before {
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
-              <div class="team-label">Team 1</div>
+              <div class="team-label">Matt</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -682,9 +973,60 @@ body::before {
                   <div class="coach-item-name">Coach Ryan Moore</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">11 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">24</span>
+                    <span class="roster-name">Brooklyn Moore</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">50</span>
+                    <span class="roster-name">Hannah Brown</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">7</span>
+                    <span class="roster-name">Chloe White</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">14</span>
+                    <span class="roster-name">Laura Fitzgerald</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">9</span>
+                    <span class="roster-name">Charlie Skillings</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">12</span>
+                    <span class="roster-name">Maddie Schmidt</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">32</span>
+                    <span class="roster-name">Ambrey Roney</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">77</span>
+                    <span class="roster-name">Ellis Spargo</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">8</span>
+                    <span class="roster-name">Bayden Eveland</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">20</span>
+                    <span class="roster-name">Liz Kaatz</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">27</span>
+                    <span class="roster-name">Aubrey Mclean</span>
+                  </li>
+                </ul>
+              </details>
             </div>
             <div class="team-block">
-              <div class="team-label">Team 2</div>
+              <div class="team-label">Dukart</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -695,6 +1037,61 @@ body::before {
                   <div class="coach-item-name">Coach Greg Moulton</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">12 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">2</span>
+                    <span class="roster-name">Hannah Moulton</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">17</span>
+                    <span class="roster-name">Lily Hanson</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">11</span>
+                    <span class="roster-name">Eleanor Dukart</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">7</span>
+                    <span class="roster-name">Awnicka Floyd</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">52</span>
+                    <span class="roster-name">Whitney Amos</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">10</span>
+                    <span class="roster-name">Kaden Proctor-Rathjen</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">42</span>
+                    <span class="roster-name">Hannah Gross</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">9</span>
+                    <span class="roster-name">Peyton Weaver</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">15</span>
+                    <span class="roster-name">Addison Borzy</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">20</span>
+                    <span class="roster-name">Evalynn Borzy</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">19</span>
+                    <span class="roster-name">Zoe Ferebee</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">99</span>
+                    <span class="roster-name">Cierra Grimmer</span>
+                  </li>
+                </ul>
+              </details>
             </div>
           </div>
         </div>
@@ -710,7 +1107,7 @@ body::before {
           <div class="coaches-label">Coaching Staff</div>
           <div class="team-groups">
             <div class="team-block">
-              <div class="team-label">Team 1</div>
+              <div class="team-label">David</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -721,9 +1118,72 @@ body::before {
                   <div class="coach-item-name">Coach Tami Hensley</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">14 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">11</span>
+                    <span class="roster-name">Aiyla Moore Wenzinger</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">29</span>
+                    <span class="roster-name">Aniya Billeb</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">44</span>
+                    <span class="roster-name">Madelyn Bailey</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">27</span>
+                    <span class="roster-name">Bella Loftis</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">6</span>
+                    <span class="roster-name">Addyson Atkins</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">18</span>
+                    <span class="roster-name">Fayth Sanders</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">25</span>
+                    <span class="roster-name">Kaleah Schregardus</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">00</span>
+                    <span class="roster-name">Emalee Grace Lake</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">22</span>
+                    <span class="roster-name">Taelyn Danner</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">0</span>
+                    <span class="roster-name">Shayne Crockatt</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">21</span>
+                    <span class="roster-name">Kaliyah Keel</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">24</span>
+                    <span class="roster-name">Kadence Townsend</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">28</span>
+                    <span class="roster-name">Bella Logan</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">1</span>
+                    <span class="roster-name">Madison Kretcher</span>
+                  </li>
+                </ul>
+              </details>
             </div>
             <div class="team-block">
-              <div class="team-label">Team 2</div>
+              <div class="team-label">Landon</div>
               <div class="coach-list">
                 <div class="coach-item">
                   <div class="coach-dot"></div>
@@ -738,6 +1198,61 @@ body::before {
                   <div class="coach-item-name">Coach Kirk Sweeney</div>
                 </div>
               </div>
+              <details class="roster">
+                <summary>
+                  <span>Roster</span><span class="roster-count">12 players</span>
+                </summary>
+                <ul class="roster-list">
+                  <li>
+                    <span class="roster-num">8</span>
+                    <span class="roster-name">Jessie Brill</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">31</span>
+                    <span class="roster-name">Hayden Bell</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">12</span>
+                    <span class="roster-name">Piper Berrington</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">2</span>
+                    <span class="roster-name">Lucy Anderson</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">88</span>
+                    <span class="roster-name">Dixie Pokladnik</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">24</span>
+                    <span class="roster-name">Amira Edwards</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">21</span>
+                    <span class="roster-name">Nariyah Wagner</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">19</span>
+                    <span class="roster-name">Laniee Barton</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">20</span>
+                    <span class="roster-name">Haylee Kastl</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">41</span>
+                    <span class="roster-name">Kaya Stevenson</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">5</span>
+                    <span class="roster-name">Kylan Rhinehart</span>
+                  </li>
+                  <li>
+                    <span class="roster-num">25</span>
+                    <span class="roster-name">Anya Rumage</span>
+                  </li>
+                </ul>
+              </details>
             </div>
           </div>
         </div>
