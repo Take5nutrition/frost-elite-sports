@@ -388,50 +388,66 @@ body::before {
 }
 
 /* ============== ROSTER DISCLOSURE ============== */
-/* Native <details> — opens with no JS and is keyboard accessible. */
-.roster {
-  margin-top: .9rem;
-  border-top: 1px solid var(--line-soft);
-}
+/* Native <details> — opens with no JS and is keyboard operable.
+   Styled as an explicit button so it reads as something you can open. */
+.roster { margin-top: 1.1rem; }
 .roster > summary {
   display: flex;
   align-items: center;
-  gap: .75rem;
-  padding: .8rem 0 .2rem;
+  gap: .7rem;
+  padding: .72rem .9rem;
   cursor: pointer;
   list-style: none;
+  background: var(--ink-3);
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
   font-family: var(--mono);
-  font-size: .58rem;
-  letter-spacing: .22em;
+  font-size: .62rem;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--ice);
-  transition: opacity .25s var(--ease);
+  transition: background .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease);
 }
 .roster > summary::-webkit-details-marker { display: none; }
-.roster > summary:hover { opacity: .72; }
-.roster > summary:focus-visible {
-  outline: 2px solid var(--ice);
-  outline-offset: 3px;
+.roster > summary:hover {
+  border-color: var(--ice);
+  transform: translateY(-1px);
 }
+.roster > summary:focus-visible { outline: 2px solid var(--ice); outline-offset: 3px; }
+/* an expanded roster keeps the accent border so it reads as active */
+.roster[open] > summary { border-color: var(--ice); }
+.roster-cta { font-weight: 600; }
+.roster-cta-hide { display: none; }
+.roster[open] .roster-cta-show { display: none; }
+.roster[open] .roster-cta-hide { display: inline; }
 .roster-count {
   color: var(--muted);
-  letter-spacing: .12em;
+  letter-spacing: .1em;
+  font-size: .58rem;
 }
-/* Chevron, rotates on open */
-.roster > summary::after {
-  content: "";
-  width: 6px; height: 6px;
+/* Chevron sits in its own disc so the control has a clear hit cue */
+.roster-chevron {
   margin-left: auto;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--ice);
+  display: grid;
+  place-items: center;
+  flex: none;
   transition: transform .3s var(--ease);
 }
-.roster[open] > summary::after { transform: translateY(1px) rotate(-135deg); }
+.roster-chevron::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-right: 1.6px solid var(--ink);
+  border-bottom: 1.6px solid var(--ink);
+  transform: translateY(-2px) rotate(45deg);
+}
+.roster[open] .roster-chevron { transform: rotate(180deg); }
 
 .roster-list {
   list-style: none;
-  margin: .85rem 0 .35rem;
+  margin: .9rem 0 .35rem;
   display: grid;
   gap: .12rem;
 }
@@ -440,7 +456,7 @@ body::before {
   grid-template-columns: 2.2rem 1fr;
   align-items: baseline;
   gap: .75rem;
-  padding: .3rem 0;
+  padding: .32rem 0;
   border-bottom: 1px solid var(--line-soft);
 }
 .roster-list li:last-child { border-bottom: none; }
@@ -464,7 +480,7 @@ body::before {
 }
 @media (prefers-reduced-motion: reduce) {
   .roster[open] .roster-list { animation: none; }
-  .roster > summary::after { transition: none; }
+  .roster > summary, .roster-chevron { transition: none; }
 }
 
 /* ============== CTA ============== */
@@ -672,7 +688,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">10 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">10 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -736,7 +754,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">11 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">11 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -813,7 +833,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">12 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">12 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -894,7 +916,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">12 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">12 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -975,7 +999,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">11 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">11 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -1039,7 +1065,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">12 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">12 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -1120,7 +1148,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">14 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">14 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
@@ -1200,7 +1230,9 @@ body::before {
               </div>
               <details class="roster">
                 <summary>
-                  <span>Roster</span><span class="roster-count">12 players</span>
+                  <span class="roster-cta"><span class="roster-cta-show">View Roster</span><span class="roster-cta-hide">Hide Roster</span></span>
+                  <span class="roster-count">12 players</span>
+                  <span class="roster-chevron" aria-hidden="true"></span>
                 </summary>
                 <ul class="roster-list">
                   <li>
